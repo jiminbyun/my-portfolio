@@ -38,7 +38,13 @@ function getRandomTopic() {
   index = getRandomIndex(topics);
   const topic = topics[index];
 
-  // Add it to the page
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = topic;
+  addTexttoPage(topic, 'topic-container'); 
+}
+
+function getRandomElementfromTopic(){
+}
+
+function addTexttoPage(text, id){
+    const container = document.getElementById(id);
+    container.innerText = text;
 }
