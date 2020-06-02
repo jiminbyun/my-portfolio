@@ -7,13 +7,16 @@
     <script src="script.js"></script>
   </head>
   <body>
-    <div id = "links">
-        <a href="https://www.linkedin.com/in/jimin-byun/">LinkedIn</a>
-        <a href="https://github.com/jiminbyun">Github</a>
+    <div id="home">
+        <h1>Jimin Byun</h1>
+        <div id="links">
+            <a href="https://www.linkedin.com/in/jimin-byun/">LinkedIn</a>
+            <a href="https://github.com/jiminbyun">Github</a>
+        </div>
     </div>
     <div id="intro">
-        <h1>Jimin Byun</h1>
-        <p> Hello! I am Jimin. I'm 19, rising junior at Carnegie Mellon University, School of Computer Science. 
+        <h2>Hello! I am Jimin.</h2>
+        <p> I'm 19, rising junior at Carnegie Mellon University, School of Computer Science. 
             I am majoring in Artificial Intelligence with additional major in Computer Science. 
             While I enjoyed every new things I learned in school, some of best courses for me was Computer Vision, Planning Teachniques for Robotics and Parallel Algorithms. 
             I am originally from Seoul, South Korea, although I spent most of my post elementary school years in small island called Jeju. 
@@ -24,14 +27,17 @@
             My friends and I spend most of our time together playing board games or going to Room Escapes. 
             Contrary to my other hobbies, I also play drum kit for fun, especially for upbeat songs. (Not that I'm good at it)
         </p>
-
-        <p>Click here to get a random message:</p>
-        <button onclick="addRandomGreeting()">Hello</button>
+    </div>
+    <div id="random">
+        <h2>Random-Random Information</h2>
+        <p>Click here to get a random</p>
+        <button onclick="addRandomGreeting()">...</button>
         <div id="greeting-container"></div>
     </div>
     <div id="exp">
+        <h2>Experiences</h2>
         <div id="ta">
-            <h2>Teaching Assistant, Spring 2020-Present </h2>
+            <h3>Teaching Assistant, Spring 2020-Present </h3>
             <p>Carnegie Mellon, Concepts of A.I, A.I Representation and Problem Solving</p>
             <ul>
                 <li>Teach various artificial intelligence methods and algorithms to implement them.</li>
@@ -40,7 +46,7 @@
             </ul>
         </div>
         <div id="patent_ra">
-            <h2>Patent Reading Group, Research Assistant, Spring 2020 </h2>
+            <h3>Patent Reading Group, Research Assistant, Spring 2020 </h3>
             <ul>
                 <li>Developed software tools to subdivide patent claims to smaller components with minimal loss of information.</li>
                 <li>Created large set of data by labelling each claims with correct seperation which can be used for training later.</li>
@@ -48,7 +54,7 @@
             </ul>
         </div>
         <div id="biorobo_ra">
-            <h2>Biorobotics Lab, Research Assistant, Spring 2019-Fall 2019 </h2>
+            <h3>Biorobotics Lab, Research Assistant, Spring 2019-Fall 2019 </h3>
             <p>Multi agent path planning, construction, search team</p>
             <ul>
                 <li>Developed 3D-visualization of multi-agent ground and ariel vehicles following planned path for ergodic search using AirSim and Unreal Engine.</li>
@@ -58,6 +64,7 @@
         </div>
     </div>
     <div id="extra">
+        <h2>Etc.</h2>
         <a href="/woof.html">Woof</a>
     </div>
   </body>
