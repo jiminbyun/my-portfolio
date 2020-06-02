@@ -34,17 +34,20 @@ const cumultative =
 function getRandomTopic() {
   const topics = ['book recommendation', 'tv show recommendation', 'korean phrase', 'thing I like'];
 
-  // Pick random topic
   index = getRandomIndex(topics);
-  const topic = topics[index];
-
-  addTexttoPage(topic, 'topic-container'); 
+  addTexttoPage(topics[index], 'topic-container'); 
 }
 
 function getRandomElementfromTopic(){
+  if (index == -1){
+      addTexttoPage('You have to select topic first!', 'elem-container');
+      return;
+  }
+  const elemIndex = getRandomIndex(cumultative[index]);
+  addTexttoPage(cumultative[index][elemIndex], 'elem-container');
 }
 
 function addTexttoPage(text, id){
-    const container = document.getElementById(id);
-    container.innerText = text;
+  const container = document.getElementById(id);
+  container.innerText = text;
 }
