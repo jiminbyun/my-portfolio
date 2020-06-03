@@ -2,29 +2,30 @@
   margin:0;
   padding: 0;
 }
-#navbar{
+
+#navbar {
   background-color: oldlace;
   height: 6vh;
+  padding-left: 10px;
   position: fixed;
   width: 100%;
-  padding-left: 10px;
 }
 
-#navbar>li{
+#navbar>li {
   display: inline-block;
   padding: 2vh 2vh;
 }
 
-#navbar>li>a{
+#navbar>li>a {
   color: saddlebrown;
+  font: 2vh "Lucida Console", Monaco, Monospace;
   text-align: center;
   text-decoration: none;
-  font: 2vh "Lucida Console", Monaco, Monospace;
 }
 
-#navbar>li>a:hover{
-    color: midnightblue;
-    text-decoration: underline; 
+#navbar>li>a:hover {
+  color: midnightblue;
+  text-decoration: underline; 
 }
 
 #home {
