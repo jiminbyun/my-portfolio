@@ -16,7 +16,7 @@
 // Initialize to empty string to represent no topic is selected when page is first loaded. 
 var topic="";
 
-const TOPICMAP = new Map([
+const TOPIC_ELEMENT_MAP = new Map([
   ['book recommendation', ['Rangers', 'Exhalation', 'The Elegant Universe', 'Human Acts']],
   ['tv show recommendation', ['Brookyln Nine Nine', 'Designated Survivor', 'Person of Interest', 'The Good Place', 'Broadchurch']],
   ['korean phrase', ['안녕하세요!', '좋은 하루 되세요!', '오늘 날씨는 어떤가요?', '졸려요', '고맙습니다']],
@@ -42,7 +42,7 @@ function setElementText(text, id) {
  * Generate random topic and display its description on the page.
  */
 function getRandomTopic() {
-  const TOPICS = Array.from(TOPICMAP.keys());
+  const TOPICS = Array.from(TOPIC_ELEMENT_MAP.keys());
   topic = getRandomElement(TOPICS);
   setElementText(topic, 'topic-container'); 
 }
@@ -55,7 +55,7 @@ function getRandomElementfromTopic() {
       setElementText('You have to select topic first!', 'elem-container');
       return;
   }
-  let elemarr = TOPICMAP.get(topic);
-  let elem = getRandomElement(elemarr)
+  let elemArr = TOPIC_ELEMENT_MAP.get(topic);
+  let elem = getRandomElement(elemArr)
   setElementText(elem, 'elem-container');
 }
