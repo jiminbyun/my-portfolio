@@ -1,43 +1,43 @@
-*{
-    margin:0;
-    padding: 0;
+* {
+  margin:0;
+  padding: 0;
 }
-#home{
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    background-color: oldlace;
-}
-
-#home-container{
-    margin-top: 35vh;
+#home {
+  background-color: oldlace;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
 }
 
-#links{
-    display: flex;
-    justify-content: center;
+#home-container {
+  margin-top: 35vh;
 }
 
-#links>button{
-    border: 1px solid black;
-    background-color: oldlace;
-    color: black;
-    border-radius: 50%;
-    height: 60px;
-    width: 60px;
-    margin: 15px;
+#links {
+  display: flex;
+  justify-content: center;
 }
 
-#links>button:hover{
-    background-color: darkslategrey;
-    color:white;
+#links>button {
+  border: 1px solid black;
+  background-color: oldlace;
+  border-radius: 50%;
+  color: black;
+  height: 60px;
+  margin: 15px;
+  width: 60px;
 }
 
-#links>button>i{
-    font-size: 30px;
+#links>button:hover {
+  background-color: darkslategrey;
+  color:white;
 }
 
-h1{
-    font: 10vh "Lucida Console", Monaco, Monospace;
+#links>button>i {
+  font-size: 30px;
+}
+
+h1 {
+  font: 10vh "Lucida Console", Monaco, Monospace;
 }
 
