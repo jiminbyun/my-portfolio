@@ -21,3 +21,8 @@
 #links>button>i{
     font-size: 30px;
 }
+
+h1{
+    font: 80px "Lucida Console", Monaco, Monospace;
+    margin-bottom: 10px;
+}
