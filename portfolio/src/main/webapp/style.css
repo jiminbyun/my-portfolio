@@ -73,9 +73,9 @@ h1 {
 }
 
 #intro {
-  padding: 10vh 15vw;
   background-color: rgb(204, 124, 97);
   display: inline-block;
+  padding: 10vh 15vw;
 }
 
 h2 {
@@ -83,24 +83,24 @@ h2 {
   margin-bottom: 15px;
 }
 
-#intro-hand{
-  width: 15vw;
+#intro-hand {
   float: left;
+  width: 15vw;
 }
 
-#intro-hand>p{
+#intro-hand>p {
   font-size: 7vw;
   text-align: center;
 }
 
-#intro-hand>p:hover{
+#intro-hand>p:hover {
   animation: wave 0.5s alternate infinite;
   animation-timing-function: ease-in-out;
 }
 
-@keyframes wave{
-    0% {transform: rotate(-10deg);}
-    100% {transform: rotate(10deg);}
+@keyframes wave {
+  0% {transform: rotate(-10deg);}
+  100% {transform: rotate(10deg);}
 }
 
 #intro-text {
@@ -108,6 +108,7 @@ h2 {
   float: right;
   width: 55vw;
 }
+
 #intro-text>p {
   color: gainsboro;
   font: 15px Verdana, Geneva, sans-serif;
