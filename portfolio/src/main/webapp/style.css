@@ -3,12 +3,28 @@
   padding: 0;
 }
 #navbar{
+  background-color: oldlace;
+  height: 6vh;
   position: fixed;
   width: 100%;
+  padding-left: 10px;
 }
 
 #navbar>li{
   display: inline-block;
+  padding: 2vh 2vh;
+}
+
+#navbar>li>a{
+  color: saddlebrown;
+  text-align: center;
+  text-decoration: none;
+  font: 2vh "Lucida Console", Monaco, Monospace;
+}
+
+#navbar>li>a:hover{
+    color: midnightblue;
+    text-decoration: underline; 
 }
 
 #home {
