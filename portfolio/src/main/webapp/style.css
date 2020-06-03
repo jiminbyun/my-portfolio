@@ -67,3 +67,24 @@ h1 {
   font: 10vh "Lucida Console", Monaco, Monospace;
 }
 
+#intro {
+  color: whitesmoke;
+  padding: 10vh 15vw;
+  background-color: rgb(204, 124, 97);
+}
+
+h2 {
+  font: bold 30px "Trebuchet MS", Helvetica, sans-serif;
+  margin-bottom: 15px;
+}
+
+#intro>p {
+  color: gainsboro;
+  font: 15px Verdana, Geneva, sans-serif;
+  line-height: 1.5;
+}
+
+#intro>p:first-of-type {
+  margin-bottom: 30px;
+}
+
