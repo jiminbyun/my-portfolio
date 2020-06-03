@@ -2,6 +2,14 @@
   margin:0;
   padding: 0;
 }
+#navbar{
+  position: fixed;
+  width: 100%;
+}
+
+#navbar>li{
+  display: inline-block;
+}
 
 #home {
   background-color: oldlace;
