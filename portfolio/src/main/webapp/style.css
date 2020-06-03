@@ -28,8 +28,8 @@ html {
 }
 
 #navbar>li>a:hover {
-  color: midnightblue;
-  text-decoration: underline; 
+  color: darkslategrey;
+  font-weight: bold;
 }
 
 #home {
