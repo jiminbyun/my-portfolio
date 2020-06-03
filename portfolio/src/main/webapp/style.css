@@ -28,6 +28,11 @@
     margin: 15px;
 }
 
+#links>button:hover{
+    background-color: darkslategrey;
+    color:white;
+}
+
 #links>button>i{
     font-size: 30px;
 }
