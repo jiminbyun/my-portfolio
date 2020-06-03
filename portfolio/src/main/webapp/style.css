@@ -1,6 +1,23 @@
+*{
+    margin:0;
+    padding: 0;
+}
 #home{
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    background-color: linen;
+    background-color: oldlace;
+}
+
+#links>button{
+    border: 1px solid black;
+    background-color: oldlace;
+    color: black;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+}
+
+#links>button>i{
+    font-size: 30px;
 }
