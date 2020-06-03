@@ -12,53 +12,50 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// Global variable to track which topic has been randomly selected. 
+// Initialize to empty string to represent no topic is selected when page is first loaded. 
+var topic="";
+
+const TOPIC_ELEMENT_MAP = new Map([
+  ['book recommendation', ['Rangers', 'Exhalation', 'The Elegant Universe', 'Human Acts']],
+  ['tv show recommendation', ['Brookyln Nine Nine', 'Designated Survivor', 'Person of Interest', 'The Good Place', 'Broadchurch']],
+  ['korean phrase', ['안녕하세요!', '좋은 하루 되세요!', '오늘 날씨는 어떤가요?', '졸려요', '고맙습니다']],
+  ['thing I like', ['Penguin', 'Blue', 'Baseball', 'Cheesecake']],
+]);
+
 /**
- * Gets random valid index of an given array
+ * Gets a random element of a given array.
  */
-function getRandomIndex(array) {
-  return Math.floor(Math.random() * array.length);
+function getRandomElement(array) {
+  return array[Math.floor(Math.random() * array.length)];
 }
 
 /**
- * Displays the text in the element in the page with given id
+ * Displays the text in the element in the page with given id.
  */
-function addTexttoPage(text, id){
+function setElementText(text, id) {
   const container = document.getElementById(id);
   container.innerText = text;
 }
 
-// Global variable to track which topic has been randomly selected. 
-// Initialize to -1 to represent no topic is selected when page is first loaded. 
-var topicIndex = -1;
-const books =
-  ['Rangers', 'Exhalation', 'The Elegant Universe', 'Human Acts'];
-const tvshows =
-  ['Brookyln Nine Nine', 'Designated Survivor', 'Person of Interest', 'The Good Place', 'Broadchurch'];
-const korean =
-  ['안녕하세요!', '좋은 하루 되세요!', '오늘 날씨는 어떤가요?', '졸려요', '고맙습니다'];
-const misc =
-  ['Penguin', 'Blue', 'Baseball', 'Cheesecake'];
-const cumultative =
-  [books, tvshows, korean, misc];
-
 /**
- * Generate random topic and display its description on the page 
+ * Generate random topic and display its description on the page.
  */
 function getRandomTopic() {
-  const topics = ['book recommendation', 'tv show recommendation', 'korean phrase', 'thing I like'];
-
-  topicIndex = getRandomIndex(topics);
-  addTexttoPage(topics[topicIndex], 'topic-container'); 
+  const TOPICS = Array.from(TOPIC_ELEMENT_MAP.keys());
+  topic = getRandomElement(TOPICS);
+  setElementText(topic, 'topic-container'); 
 }
 
 /**
  * Generate random element from topic if topic is valid and display it on the page.  
  */
-function getRandomElementfromTopic(){
-  if (topicIndex == -1){ 
-      addTexttoPage('You have to select topic first!', 'elem-container');
+function getRandomElementfromTopic() {
+  if (topic.length == 0){ 
+      setElementText('You have to select topic first!', 'elem-container');
       return;
   }
-  const elemIndex = getRandomIndex(cumultative[topicIndex]);
-  addTexttoPage(cumultative[topicIndex][elemIndex], 'elem-container');
+  let elemArr = TOPIC_ELEMENT_MAP.get(topic);
+  let elem = getRandomElement(elemArr)
+  setElementText(elem, 'elem-container');
 }
