@@ -221,3 +221,12 @@ h3 {
   margin: 0;
 }
 
+#extra {
+  background-color: oldlace;
+  padding: 10vh 15vw;
+}
+
+#extra>a {
+  font-size: 50pt;
+  text-decoration: none;
+}
