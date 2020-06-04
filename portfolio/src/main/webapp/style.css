@@ -81,7 +81,7 @@ h1 {
 
 h2 {
   font: bold 30px "Trebuchet MS", Helvetica, sans-serif;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
 }
 
 #intro-hand {
@@ -185,5 +185,39 @@ h2 {
   display: block;
   font: 20px Verdana, Geneva, sans-serif;
   height: 40px;
+}
+
+#exp {
+  background-color: rgb(204, 124, 97);
+  color: whitesmoke;
+  padding: 10vh 15vw;
+}
+
+.exp-item {
+  font: 15px Verdana, Geneva, sans-serif;
+}
+
+h3 {
+  color: linen;
+}
+
+.exp-item>p {
+  color: black;
+  font-style: italic;
+  margin-top: 10px;
+}
+
+.exp-item>ul {
+  color: gainsboro;
+  list-style: square outside;
+  padding: 13px 30px;
+}
+
+.exp-item>ul>li {
+  margin: 0 0 6px 0;
+}
+
+.exp-item>ul:last-child {
+  margin: 0;
 }
 
