@@ -230,10 +230,17 @@ h3 {
   width: 30vh;
   text-align: center;
   margin-top: 30px;
+  animation: move 10s infinite alternate;
+  animation-timing-function: linear;
+}
+
+@keyframes move {
+  0% { margin-left: 55vw};
+  100% { margin-left: 0};
 }
 
 #dog>p {
-  font: 3vh Verdana, Geneva, sans-serif;
+  font: 20px Verdana, Geneva, sans-serif;
   color: oldlace;
   margin-top: 10px;
 }
