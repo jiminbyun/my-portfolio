@@ -226,7 +226,23 @@ h3 {
   padding: 10vh 15vw;
 }
 
-#extra>a {
-  font-size: 50pt;
+#dog {
+  width: 30vh;
+  text-align: center;
+  margin-top: 30px;
+}
+
+#dog>p {
+  font: 3vh Verdana, Geneva, sans-serif;
+  color: oldlace;
+  margin-top: 10px;
+}
+
+#dog>a:hover + #dog-phrase {
+  color: saddlebrown;
+}
+
+#dog>a {
+  font-size: 12vh;
   text-decoration: none;
 }
