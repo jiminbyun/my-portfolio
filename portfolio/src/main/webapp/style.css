@@ -227,21 +227,21 @@ h3 {
 }
 
 #dog {
-  width: 30vh;
-  text-align: center;
-  margin-top: 30px;
   animation: move 10s infinite alternate;
   animation-timing-function: linear;
+  margin-top: 30px;
+  text-align: center;
+  width: 30vh;
 }
 
 @keyframes move {
-  0% { margin-left: 55vw};
-  100% { margin-left: 0};
+  0% { margin-left: 55vw };
+  100% { margin-left: 0 };
 }
 
 #dog>p {
-  font: 20px Verdana, Geneva, sans-serif;
   color: oldlace;
+  font: 20px Verdana, Geneva, sans-serif;
   margin-top: 10px;
 }
 
