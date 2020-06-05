@@ -3,37 +3,56 @@
     <meta charset="UTF-8">
     <title>My Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="script.js"></script>
   <body>
+    <ul id="navbar">
+      <li><a href="#home">Home</a>
+      <li><a href="#intro">About Me</a>
+      <li><a href="#random">Random</a>
+      <li><a href="#exp">Experience</a>
+      <li><a href="#extra">Etc</a>
+    </ul>
     <div id="home">
-      <h1>Jimin Byun</h1>
-      <div id="links">
-        <a href="https://www.linkedin.com/in/jimin-byun/">LinkedIn</a>
-        <a href="https://github.com/jiminbyun">Github</a>
+      <div id="home-container">
+        <h1> JIMIN BYUN</h1>
+        <div id="links">
+          <button onclick="location.href='https://www.linkedin.com/in/jimin-byun/'", type="button"><i class="fa fa-linkedin"></i></button>
+          <button onclick="location.href='https://github.com/jiminbyun'", type="button"><i class="fa fa-github"></i></button>
+        </div>
       </div>
     </div>
     <div id="intro">
-      <h2>Hello! I am Jimin.</h2>
-      <p> I'm 19, rising junior at Carnegie Mellon University, School of Computer Science. 
-          I am majoring in Artificial Intelligence with additional major in Computer Science. 
-          While I enjoyed every new things I learned in school, some of best courses for me was Computer Vision, Planning Teachniques for Robotics and Parallel Algorithms. 
-          I am originally from Seoul, South Korea, although I spent most of my post elementary school years in small island called Jeju. 
-          I came to United States for the first time as a college freshman, so my experience and knowledge about US is limited to Pittsburgh, specifically within 10km radius around our school. 
-      <p> In my free time, I enjoy solving jigsaw puzzles while marathoning a movie or tv series. 
-          My friends and I spend most of our time together playing board games or going to Room Escapes. 
-          Contrary to my other hobbies, I also play drum kit for fun, especially for upbeat songs. (Not that I'm good at it)
+      <div id="intro-hand">
+        <p>👋
+      </div>
+      <div id="intro-text">
+        <h2>Hello! I am Jimin.</h2>
+        <p> I'm 19, rising junior at Carnegie Mellon University, School of Computer Science. 
+            I am majoring in Artificial Intelligence with additional major in Computer Science. 
+            While I enjoyed every new things I learned in school, some of best courses for me was Computer Vision, Planning Teachniques for Robotics and Parallel Algorithms. 
+            I am originally from Seoul, South Korea, although I spent most of my post elementary school years in small island called Jeju. 
+            I came to United States for the first time as a college freshman, so my experience and knowledge about US is limited to Pittsburgh, specifically within 10km radius around our school. 
+        <p> In my free time, I enjoy solving jigsaw puzzles while marathoning a movie or tv series. 
+            My friends and I spend most of our time together playing board games or going to Room Escapes. 
+            Contrary to my other hobbies, I also play drum kit for fun, especially for upbeat songs. (Not that I'm good at it)
+      </div>
     </div>
     <div id="random">
       <h2>Random-Random Information</h2>
-      <p>Click here to get a random</p>
-      <button onclick="getRandomTopic()">...</button>
-      <div id="topic-container"></div>
-      <button onclick="getRandomElementfromTopic()">...</button>
-      <div id="elem-container"></div>
+      <div id="prompt">
+        <p>Click below to get a random ></p>
+        <button onclick="getRandomTopic()">Select Topic</button>
+        <div id="topic-container"></div>
+      </div>
+      <div id="response">
+        <button onclick="getRandomElementfromTopic()">Click Me to Get Item!</button>
+        <div id="elem-container"></div>
+      </div>
     </div>
     <div id="exp">
       <h2>Experiences</h2>
-      <div id="ta">
+      <div class="exp-item" id="ta">
         <h3>Teaching Assistant, Spring 2020-Present</h3>
         <p>Carnegie Mellon, Concepts of A.I, A.I Representation and Problem Solving
         <ul>
@@ -42,7 +61,7 @@
             <li>Create questions for quiz and exams and pretest programming homeworks.
         </ul>
       </div>
-      <div id="patent_ra">
+      <div class="exp-item" id="patent_ra">
         <h3>Patent Reading Group, Research Assistant, Spring 2020</h3>
         <ul>
           <li>Developed software tools to subdivide patent claims to smaller components with minimal loss of information.
@@ -50,7 +69,7 @@
           <li>Used python regex library for straight-forward pattern matching and nlp library to incorporate context while seperating.
         </ul>
       </div>
-      <div id="biorobo_ra">
+      <div class="exp-item" id="biorobo_ra">
         <h3>Biorobotics Lab, Research Assistant, Spring 2019-Fall 2019</h3>
         <p>Multi agent path planning, construction, search team
         <ul>
@@ -62,5 +81,8 @@
     </div>
     <div id="extra">
       <h2>Etc.</h2>
-      <a href="/woof.html">Woof</a>
+      <div id="dog">
+        <a href="/woof.html">🐕</a>
+        <p id="dog-phrase">Click the dog!</p>
+      </div>
     </div>
