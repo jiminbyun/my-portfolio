@@ -1,6 +1,37 @@
+html {
+  scroll-behavior: smooth;
+}
+
 * {
   margin:0;
   padding: 0;
+}
+
+#navbar {
+  background-color: oldlace;
+  box-shadow: 0 4px 2px rgb(240, 222, 190);
+  height: 6vh;
+  padding-left: 10px;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+}
+
+#navbar > li {
+  display: inline-block;
+  padding: 2vh 2vh;
+}
+
+#navbar > li > a {
+  color: saddlebrown;
+  font: 2vh "Lucida Console", Monaco, Monospace;
+  text-align: center;
+  text-decoration: none;
+}
+
+#navbar > li > a:hover {
+  color: darkslategrey;
+  font-weight: bold;
 }
 
 #home {
@@ -19,7 +50,7 @@
   justify-content: center;
 }
 
-#links>button {
+#links > button {
   border: 1px solid black;
   background-color: oldlace;
   border-radius: 50%;
@@ -29,12 +60,12 @@
   width: 60px;
 }
 
-#links>button:hover {
+#links > button:hover {
   background-color: darkslategrey;
   color:white;
 }
 
-#links>button>i {
+#links > button > i {
   font-size: 30px;
 }
 
@@ -42,3 +73,183 @@ h1 {
   font: 10vh "Lucida Console", Monaco, Monospace;
 }
 
+#intro {
+  background-color: rgb(204, 124, 97);
+  display: inline-block;
+  padding: 10vh 15vw;
+}
+
+h2 {
+  font: bold 30px "Trebuchet MS", Helvetica, sans-serif;
+  margin-bottom: 25px;
+}
+
+#intro-hand {
+  float: left;
+  width: 15vw;
+}
+
+#intro-hand > p {
+  font-size: 7vw;
+  text-align: center;
+}
+
+#intro-hand > p:hover {
+  animation: wave 0.5s alternate infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes wave {
+  0% { transform: rotate(-10deg); }
+  100% { transform: rotate(10deg); }
+}
+
+#intro-text {
+  color: whitesmoke;
+  float: right;
+  width: 55vw;
+}
+
+#intro-text > p {
+  color: gainsboro;
+  font: 15px Verdana, Geneva, sans-serif;
+  line-height: 1.5;
+}
+
+#intro-text > p:first-of-type {
+  margin-bottom: 30px;
+}
+
+#random {
+  background-color: oldlace;
+  padding: 10vh 15vw;
+  margin-top: -5px;
+}
+
+#prompt {
+  color: saddlebrown;
+  font: 20px Verdana, Geneva, sans-serif;
+  height: 30px;
+  margin: 20px 0px 15px;
+  width: 100%;
+}
+
+#prompt > p {
+  display: inline-block;
+}
+
+#prompt > button {
+  background-color: darkslategray;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  display: inline-block;
+  font: 15px Verdana, Geneva, sans-serif;
+  padding: 5px 10px;
+  text-align: center;
+}
+
+#topic-container {
+  display: inline-block;
+  color: darkslategray;
+  padding-left: 10px;
+}
+
+#response {
+  text-align: center;
+}
+
+#response > button {
+  background-color: darksalmon;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px grey;
+  color: aliceblue;
+  font: 20px Verdana, Geneva, sans-serif;
+  margin-bottom: 30px;
+  padding: 20px 30px;
+}
+
+#response > button:hover {
+  background-color: salmon;
+}
+
+#response > button:active {
+  background-color: salmon;
+  box-shadow: 0 5px dimgrey;
+  transform: translateY(4px);
+}
+
+#elem-container {
+  color: black;
+  display: block;
+  font: 20px Verdana, Geneva, sans-serif;
+  height: 40px;
+}
+
+#exp {
+  background-color: rgb(204, 124, 97);
+  color: whitesmoke;
+  padding: 10vh 15vw;
+}
+
+.exp-item {
+  font: 15px Verdana, Geneva, sans-serif;
+}
+
+h3 {
+  color: linen;
+}
+
+.exp-item > p {
+  color: black;
+  font-style: italic;
+  margin-top: 10px;
+}
+
+.exp-item > ul {
+  color: gainsboro;
+  list-style: square outside;
+  padding: 13px 30px;
+}
+
+.exp-item > ul > li {
+  margin: 0 0 6px 0;
+}
+
+.exp-item > ul:last-child {
+  margin: 0;
+}
+
+#extra {
+  background-color: oldlace;
+  padding: 10vh 15vw;
+}
+
+#dog {
+  animation: move 10s infinite alternate;
+  animation-timing-function: linear;
+  margin-top: 30px;
+  text-align: center;
+  width: 30vh;
+}
+
+@keyframes move {
+  0% { margin-left: 55vw };
+  100% { margin-left: 0 };
+}
+
+#dog > p {
+  color: oldlace;
+  font: 20px Verdana, Geneva, sans-serif;
+  margin-top: 10px;
+}
+
+#dog > a:hover + #dog-phrase {
+  color: saddlebrown;
+}
+
+#dog > a {
+  font-size: 12vh;
+  text-decoration: none;
+}
