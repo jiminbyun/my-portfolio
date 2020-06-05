@@ -87,3 +87,40 @@ img {
 .right::after {
   left: -13px;
 }
+
+.overlay {
+  position: absolute;
+  padding: 10px 40px;
+  opacity: 0.7;
+  height: 0;
+  transition: .5s ease;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.overlay-container {
+  background-color: darkslategrey;
+  height: 100%;
+  overflow: hidden;
+}
+
+.event:hover .overlay {
+  height: 100%;
+}
+
+.event:hover .overlay-text {
+  visibility: visible;
+}
+
+.overlay-text {
+  color: linen;
+  opacity: 1;
+  font: 15px Verdana, Geneva, sans-serif;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  visibility: hidden;
+}
