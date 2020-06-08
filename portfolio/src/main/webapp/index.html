@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="script.js"></script>
-  <body>
+  <body onload="getGreetingfromServer()">
     <ul id="navbar">
       <li><a href="#home">Home</a>
       <li><a href="#intro">About Me</a>
@@ -85,4 +85,7 @@
         <a href="/woof.html">🐕</a>
         <p id="dog-phrase">Click the dog!</p>
       </div>
+    </div>
+    <div id="comments">
+      <div id="greetings-container"></div>
     </div>

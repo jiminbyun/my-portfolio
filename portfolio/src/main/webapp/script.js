@@ -59,3 +59,9 @@ function getRandomElementfromTopic() {
   let elem = getRandomElement(elemArr)
   setElementText(elem, 'elem-container');
 }
+
+async function getGreetingfromServer() {
+  const response = await fetch('/data');
+  const greeting = await response.text();
+  setElementText(greeting, 'greetings-container');
+}
