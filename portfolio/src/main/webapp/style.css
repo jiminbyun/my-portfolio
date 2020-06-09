@@ -253,3 +253,28 @@ h3 {
   font-size: 12vh;
   text-decoration: none;
 }
+
+#comments {
+  background-color: rgb(204, 124, 97);
+  color: whitesmoke;
+  padding: 10vh 15vw;
+}
+
+#comments-container {
+  color: saddlebrown;
+  font: 15px Verdana, Geneva, sans-serif;
+  list-style-type: none;
+  padding: 30px;
+}
+
+.comment-dark {
+  background-color: oldlace;
+  margin: 3px;
+  padding: 10px;
+}
+
+.comment-light {
+  background-color: whitesmoke;
+  margin: 3px;
+  padding: 10px;
+}
