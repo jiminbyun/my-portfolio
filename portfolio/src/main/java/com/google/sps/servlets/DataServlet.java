@@ -41,7 +41,7 @@ public class DataServlet extends HttpServlet {
     return json;
   }
 
-  private List<Comment> getComments(maxNumComments) {
+  private List<Comment> getComments(int maxNumComments) {
     Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
@@ -64,10 +64,7 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     int maxNumComments = Integer.parseInt(getParameter(request, "num-comments", "5"));
-
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    PreparedQuery results = datastore.prepare(query);
-    List<String> comments = getComments(maxNumComments);
+    List<Comment> comments = getComments(maxNumComments);
 
     response.setContentType("application/json;");
     response.getWriter().println(convertToJson(comments));
@@ -79,7 +76,7 @@ public class DataServlet extends HttpServlet {
     String username = getParameter(request, "username", "Anonymous");
     String password = getParameter(request, "password", "");
 
-    if (!comment.isEmpty()) {
+    if (!commentText.isEmpty()) {
       long timestamp = System.currentTimeMillis();
 
       Entity commentEntity = new Entity("Comment");
