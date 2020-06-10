@@ -12,6 +12,7 @@
       <li><a href="#random">Random</a>
       <li><a href="#exp">Experience</a>
       <li><a href="#extra">Etc</a>
+      <li><a href="#comments">Comments</a>
     </ul>
     <div id="home">
       <div id="home-container">
@@ -88,5 +89,11 @@
     </div>
     <div id="comments">
       <h2>Comments</h2>
+      <div id="comment-form">
+        <form action="/data" method="POST">
+          <textarea id="comment" name="comment-input" placeholder="Leave your comment here!"></textarea>
+          <input type="submit" />
+        </form>
+      </div>
       <ul id="comments-container"></ul>
     </div>

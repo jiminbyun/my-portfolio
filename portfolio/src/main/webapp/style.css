@@ -1,6 +1,6 @@
-html {
+/*html {
   scroll-behavior: smooth;
-}
+}*/
 
 * {
   margin:0;
@@ -277,4 +277,15 @@ h3 {
   background-color: whitesmoke;
   margin: 3px;
   padding: 10px;
+}
+
+#comment-form {
+  padding: 0 30px;
+  width: 100%;
+}
+
+#comment {
+  height: 50px;
+  resize: none;
+  width: 100%;
 }
