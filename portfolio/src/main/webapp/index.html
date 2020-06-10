@@ -90,7 +90,15 @@
     <div id="comments">
       <h2>Comments</h2>
       <div id="comments-style">
-        <form action="/data" method="POST">
+        <label for="num-comments">Maximum number of comments to show:</label>
+        <select name="num-comments" id="num-comments" form="comment-form" onchange="getCommentsfromServer()">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
+        </select>
+
+        <form id="comment-form" action="/data" method="POST">
           <textarea id="comment" name="comment-input" placeholder="Leave your comment here!"></textarea>
           <input type="submit" />
         </form>

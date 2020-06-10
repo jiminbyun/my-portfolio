@@ -70,11 +70,14 @@ function createListElement(text) {
 }
 
 /**
- * Fetches all comments from server and display it on the page
+ * Fetch comments from the server and display it on the page
  */
 async function getCommentsfromServer() {
-  const response = await fetch('/data');
+  var maxNumComments = document.getElementById("num-comments").value;
+
+  const response = await fetch('/data?num-comments=' + maxNumComments);
   const comments = await response.json();
+  
   const commentsListElement = document.getElementById('comments-container');
   commentsListElement.innerHTML = '';
   for (var i = 0; i < comments.length; i++){
