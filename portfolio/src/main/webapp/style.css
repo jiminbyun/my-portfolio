@@ -260,11 +260,10 @@ h3 {
   color: saddlebrown;
   font: 15px Verdana, Geneva, sans-serif;
   list-style-type: none;
-  padding: 30px;
 }
 
 #comments-container > li {
-  margin: 3px;
+  margin: 3px 0;
   padding: 10px;
 }
 
@@ -276,13 +275,30 @@ h3 {
   background-color:oldlace;
 }
 
-#comment-form {
-  padding: 0 30px;
-  width: 100%;
+#comments-style {
+  padding: 10px 30px;
+}
+
+#comments-style > form {
+  margin-bottom: 20px;
 }
 
 #comment {
-  height: 50px;
+  border: 2px solid gainsboro;
+  border-radius: 4px;
+  box-sizing: border-box;
+  height: 60px;
+  padding: 10px 10px;
   resize: none;
   width: 100%;
+}
+
+#comments-style > form > input[type=submit] {
+  background-color: darkslategrey;
+  border: none;
+  color: ghostwhite;
+  cursor: pointer;
+  font: 12px Verdana, Geneva, sans-serif;
+  margin: 4px 0;
+  padding: 12px 12px;
 }
