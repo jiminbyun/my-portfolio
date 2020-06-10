@@ -60,8 +60,29 @@ function getRandomElementfromTopic() {
   setElementText(elem, 'elem-container');
 }
 
-async function getGreetingfromServer() {
+/**
+ * Creates an <li> element for comments-container containing text. 
+ */
+function createCommentsListElement(text, i) {
+  const liElement = document.createElement('li');
+  if (i%2 == 0){
+    liElement.className = "comment-dark";
+  } else {
+    liElement.className = "comment-light";
+  }
+  liElement.innerText = text;
+  return liElement;
+}
+
+/**
+ * Fetches all comments from server and display it on the page
+ */
+async function getCommentsfromServer() {
   const response = await fetch('/data');
-  const greeting = await response.text();
-  setElementText(greeting, 'greetings-container');
+  const comments = await response.json();
+  const commentsListElement = document.getElementById('comments-container');
+  commentsListElement.innerHTML = '';
+  for (var i = 0; i < comments.length; i++){
+    commentsListElement.appendChild(createCommentsListElement(comments[i], i));
+  }
 }
