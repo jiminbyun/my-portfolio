@@ -11,16 +11,24 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.Long;
 import com.google.sps.data.Comment;
 
 /** Server that deletes comments **/
 @WebServlet("/delete-data")
 public class DeleteDataServlet extends HttpServlet {
 
+  private String message = "";
+
+  @Override
+  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    response.setContentType("text/plain;");
+    response.getWriter().println(message);
+  }
+
   @Override 
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    response.setContentType("text/plain;");
 
     String userPassword = request.getParameter("user-pwd");
     long id = Long.parseLong(request.getParameter("id"));
@@ -33,11 +41,13 @@ public class DeleteDataServlet extends HttpServlet {
       return;
     }
 
-    if(commentPassword.equals(userPassword)) {
+    if (commentPassword.equals(userPassword)) {
       datastore.delete(commentKey);
-      response.getWriter().println("Deleted!");
+      message = "Deleted!";
     } else {
-      response.getWriter().println("Incorrect Password. Try again.");
+      message = "Incorrect Password. Try again";
     }
+
+    response.sendRedirect("/index.html#comments");
   }
 }
