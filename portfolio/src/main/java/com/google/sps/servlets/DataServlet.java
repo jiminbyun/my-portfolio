@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
@@ -42,11 +43,12 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+    int maxNumComments = Integer.parseInt(getParameter(request, "num-comments", "5"));
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
     List<String> comments = new ArrayList<>();
-    for (Entity entity : results.asIterable()) {
+    for (Entity entity : results.asIterable(FetchOptions.Builder.withLimit(maxNumComments))) {
       String comment = (String) entity.getProperty("comment");
       comments.add(comment);
     }
@@ -57,7 +59,7 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String comment = getParameter(request, "comment-input", "");
-    if (comment != "") {
+    if (!comment.isEmpty()) {
       long timestamp = System.currentTimeMillis();
 
       Entity commentEntity = new Entity("Comment");

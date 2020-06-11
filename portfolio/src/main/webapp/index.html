@@ -89,11 +89,19 @@
     </div>
     <div id="comments">
       <h2>Comments</h2>
-      <div id="comment-form">
-        <form action="/data" method="POST">
+      <div id="comments-style">
+        <label for="num-comments">Maximum number of comments to show:</label>
+        <select name="num-comments" id="num-comments" form="comment-form" onchange="getCommentsfromServer()">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
+        </select>
+
+        <form id="comment-form" action="/data" method="POST">
           <textarea id="comment" name="comment-input" placeholder="Leave your comment here!"></textarea>
           <input type="submit" />
         </form>
+        <ul id="comments-container"></ul>
       </div>
-      <ul id="comments-container"></ul>
     </div>
