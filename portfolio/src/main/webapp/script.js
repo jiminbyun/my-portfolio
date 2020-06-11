@@ -80,6 +80,7 @@ function createCommentsListElement(comment) {
   deleteButtonElement.addEventListener('click', () => {
     const passwordForm = createPasswordForm(comment);
     liElement.appendChild(passwordForm);
+    deleteButtonElement.disabled = true;
   });
   liElement.appendChild(deleteButtonElement);
 
@@ -108,15 +109,16 @@ function createPasswordForm(comment) {
 
   const submitButton = document.createElement('input');
   submitButton.setAttribute('type', "submit");
-  submitButton.addEventListener('click', () => {
-    getCommentsfromServer();
-    deleteResult();
-  });
 
   passwordForm.appendChild(label);
   passwordForm.appendChild(userPassword);
   passwordForm.appendChild(submitButton);
   passwordForm.appendChild(commentID);
+
+  passwordForm.onsubmit = async function() {
+    await getCommentsfromServer();
+    deleteResult();
+  };
   
   return passwordForm;
 }
@@ -138,7 +140,7 @@ async function getCommentsfromServer() {
   
   const commentsListElement = document.getElementById('comments-container');
   commentsListElement.innerHTML = '';
-  for (var i = 0; i < comments.length; i++){
+  for (var i = 0; i < comments.length; i++) {
     commentsListElement.appendChild(createCommentsListElement(comments[i]));
   }
 }
