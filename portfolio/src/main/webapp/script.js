@@ -75,7 +75,45 @@ function createCommentsListElement(comment) {
   commentElement.innerText = comment.text;
   liElement.appendChild(commentElement);
 
+  const deleteButtonElement = document.createElement('button');
+  deleteButtonElement.innerText = "Delete";
+  deleteButtonElement.addEventListener('click', () => {
+    const passwordForm = createPasswordForm(comment);
+    liElement.appendChild(passwordForm);
+  });
+  liElement.appendChild(deleteButtonElement);
+
   return liElement;
+}
+
+function createPasswordForm(comment) {
+  const passwordForm = document.createElement('form');
+  passwordForm.setAttribute('method', "POST");
+  passwordForm.setAttribute('action', "/delete-data");
+
+  const userPassword = document.createElement('input');
+  userPassword.setAttribute('type', "password");
+  userPassword.setAttribute('name', "user-pwd");
+
+  const submitButton = document.createElement('input');
+  submitButton.setAttribute('type', "submit");
+  submitButton.addEventListener('click', () => {
+    deleteComment(comment);
+    getCommentsfromServer();
+  });
+
+  passwordForm.appendChild(userPassword);
+  passwordForm.appendChild(submitButton);
+  
+  return passwordForm;
+}
+
+async function deleteComment(comment) {
+  let searchParams = new URLSearchParams();
+  searchParams.append('id', comment.id);
+  const response = await fetch('/delete-data', {method: 'POST', body: searchParams});
+  const matchResult = await response.text();
+  alert(matchResult);
 }
 
 /**
