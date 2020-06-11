@@ -74,7 +74,7 @@ public class DataServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String commentText = getParameter(request, "comment-input", "");
     String username = getParameter(request, "username", "Anonymous");
-    String password = getParameter(request, "password", "");
+    String password = getParameter(request, "pwd", "");
 
     if (!commentText.isEmpty()) {
       long timestamp = System.currentTimeMillis();

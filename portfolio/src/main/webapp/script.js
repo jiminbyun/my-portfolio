@@ -68,13 +68,13 @@ function createCommentsListElement(comment) {
 
   const addInfoElement = document.createElement('p');
   const date = new Date(comment.timestamp);
-  console.log(comment.username);
-  addInfoElement.innertext = "Written by: "+ comment.username + " | " + date.toDateString();
+  addInfoElement.innerText = "Written by: "+ comment.username + " | " + date.toDateString();
   liElement.appendChild(addInfoElement);
 
   const commentElement = document.createElement('p');
-  commentElement.innertext = comment.text;
+  commentElement.innerText = comment.text;
   liElement.appendChild(commentElement);
+
   return liElement;
 }
 
