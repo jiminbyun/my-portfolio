@@ -61,11 +61,20 @@ function getRandomElementfromTopic() {
 }
 
 /**
- * Creates an <li> element containing text. 
+ * Creates an <li> element for comments-container containing text. 
  */
-function createListElement(text) {
+function createCommentsListElement(comment) {
   const liElement = document.createElement('li');
-  liElement.innerText = text;
+
+  const addInfoElement = document.createElement('p');
+  const date = new Date(comment.timestamp);
+  console.log(comment.username);
+  addInfoElement.innertext = "Written by: "+ comment.username + " | " + date.toDateString();
+  liElement.appendChild(addInfoElement);
+
+  const commentElement = document.createElement('p');
+  commentElement.innertext = comment.text;
+  liElement.appendChild(commentElement);
   return liElement;
 }
 
@@ -81,6 +90,6 @@ async function getCommentsfromServer() {
   const commentsListElement = document.getElementById('comments-container');
   commentsListElement.innerHTML = '';
   for (var i = 0; i < comments.length; i++){
-    commentsListElement.appendChild(createListElement(comments[i]));
+    commentsListElement.appendChild(createCommentsListElement(comments[i]));
   }
 }
