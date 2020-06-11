@@ -133,14 +133,15 @@ async function deleteResult() {
  * Fetch comments from the server and display it on the page
  */
 async function getCommentsfromServer() {
-  var maxNumComments = document.getElementById("num-comments").value;
+  const maxNumComments = document.getElementById("num-comments").value;
 
   const response = await fetch('/data?num-comments=' + maxNumComments);
   const comments = await response.json();
   
   const commentsListElement = document.getElementById('comments-container');
   commentsListElement.innerHTML = '';
-  for (var i = 0; i < comments.length; i++){
+
+  for (var i = 0; i < comments.length; i++) {
     commentsListElement.appendChild(createCommentsListElement(comments[i]));
   }
 }
