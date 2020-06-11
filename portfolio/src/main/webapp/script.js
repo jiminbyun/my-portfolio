@@ -90,6 +90,11 @@ function createPasswordForm(comment) {
   const passwordForm = document.createElement('form');
   passwordForm.setAttribute('method', "POST");
   passwordForm.setAttribute('action', "/delete-data");
+  passwordForm.className = "passwordForm";
+
+  const label = document.createElement('label');
+  label.innerText = "Password:";
+  label.setAttribute("for", "user-pwd");
 
   const userPassword = document.createElement('input');
   userPassword.setAttribute('type', "password");
@@ -99,14 +104,16 @@ function createPasswordForm(comment) {
   commentID.setAttribute('type', 'text');
   commentID.setAttribute('name', "id");
   commentID.setAttribute('value', comment.id);
+  commentID.className = "comment-id";
 
   const submitButton = document.createElement('input');
   submitButton.setAttribute('type', "submit");
   submitButton.addEventListener('click', () => {
     getCommentsfromServer();
-    deleteComment();
+    deleteResult();
   });
 
+  passwordForm.appendChild(label);
   passwordForm.appendChild(userPassword);
   passwordForm.appendChild(submitButton);
   passwordForm.appendChild(commentID);
@@ -114,7 +121,7 @@ function createPasswordForm(comment) {
   return passwordForm;
 }
 
-async function deleteComment() {
+async function deleteResult() {
   const response = await fetch('/delete-data');
   const matchResult = await response.text();
   alert(matchResult);

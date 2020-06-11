@@ -278,7 +278,17 @@ h3 {
 #comments-container > li > p:first-of-type {
   color: grey;
   font: 12px Verdana, Geneva, sans-serif;
-  margin-bottom: 3px;
+}
+
+#comments-container > li > p {
+  margin-bottom: 5px;
+}
+
+#comments-container > li > button {
+  background-color: darkslategrey;
+  color: white;
+  padding: 3px;
+  border: none;
 }
 
 #comments-style {
@@ -308,4 +318,12 @@ h3 {
   font: 12px Verdana, Geneva, sans-serif;
   margin: 4px 0;
   padding: 12px 12px;
+}
+
+.comment-id {
+  visibility: hidden;
+}
+
+.passwordForm {
+  margin-top: 4px;
 }
