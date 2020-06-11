@@ -133,7 +133,7 @@ async function deleteResult() {
  * Fetch comments from the server and display it on the page
  */
 async function getCommentsfromServer() {
-  var maxNumComments = document.getElementById("num-comments").value;
+  const maxNumComments = document.getElementById("num-comments").value;
 
   const response = await fetch('/data?num-comments=' + maxNumComments);
   const comments = await response.json();
