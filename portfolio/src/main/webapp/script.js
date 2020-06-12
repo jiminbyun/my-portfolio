@@ -134,8 +134,13 @@ async function deleteResult() {
  */
 async function getCommentsfromServer() {
   const maxNumComments = document.getElementById("num-comments").value;
+  const sortType = document.getElementById("sort-comments").value;
 
-  const response = await fetch('/data?num-comments=' + maxNumComments);
+  var searchParams = new URLSearchParams();
+  searchParams.append("num-comments", maxNumComments);
+  searchParams.append("sort-comments", sortType);
+
+  const response = await fetch('/data?' + searchParams);
   const comments = await response.json();
   
   const commentsListElement = document.getElementById('comments-container');
