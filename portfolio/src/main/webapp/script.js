@@ -129,16 +129,38 @@ async function deleteResult() {
   alert(matchResult);
 }
 
-/**
- * Fetch comments from the server and display it on the page
- */
-async function getCommentsfromServer() {
+function setSelectValues() {
+  let params = (new URL(document.location)).searchParams;
+  let maxNumComments = params.get("num-comments");
+  let sortType = params.get("sort-comments");
+  let comment = params.get("comments");
+  if (maxNumComments) {
+    document.getElementById(maxNumComments).setAttribute("selected", "selected");
+  }
+  if (sortType) {
+    document.getElementById(sortType).setAttribute("selected", "selected");
+  }
+  if (comments) {
+    window.history.replaceState({}, document.title, "/" + "index.html");
+    window.location.hash = "#comments";
+  }
+}
+
+function generateUrlQuery() {
   const maxNumComments = document.getElementById("num-comments").value;
   const sortType = document.getElementById("sort-comments").value;
 
   var searchParams = new URLSearchParams();
   searchParams.append("num-comments", maxNumComments);
   searchParams.append("sort-comments", sortType);
+  return searchParams;
+}
+
+/**
+ * Fetch comments from the server and display it on the page
+ */
+async function getCommentsfromServer() {
+  var searchParams = generateUrlQuery();
 
   const response = await fetch('/data?' + searchParams);
   const comments = await response.json();
@@ -149,4 +171,9 @@ async function getCommentsfromServer() {
   for (var i = 0; i < comments.length; i++) {
     commentsListElement.appendChild(createCommentsListElement(comments[i]));
   }
+}
+
+function onload() {
+  setSelectValues();
+  getCommentsfromServer();
 }

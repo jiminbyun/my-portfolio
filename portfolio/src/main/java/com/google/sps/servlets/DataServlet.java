@@ -101,7 +101,7 @@ public class DataServlet extends HttpServlet {
       datastore.put(commentEntity);
     }
 
-    response.sendRedirect("/index.html#comments");
+    response.sendRedirect("/index.html?comments=true&num-comments=10&sort-comments=latest");
   }
 
   /**
