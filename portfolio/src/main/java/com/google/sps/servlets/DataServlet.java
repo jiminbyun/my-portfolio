@@ -44,14 +44,16 @@ public class DataServlet extends HttpServlet {
   private List<Comment> getComments(int maxNumComments, String sortType) {
     Query query = new Query("Comment");
     switch (sortType) {
-      case ("latest"):
+      case "latest":
         query.addSort("timestamp", SortDirection.DESCENDING);
         break;
-      case ("oldest"):
+      case "oldest":
         query.addSort("timestamp", SortDirection.ASCENDING);
-      case ("name_ascend"):
+        break;
+      case "name_ascend":
         query.addSort("username", SortDirection.ASCENDING);
-      case ("name_descend"):
+        break;
+      case "name_descend":
         query.addSort("username", SortDirection.DESCENDING);
     }
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
