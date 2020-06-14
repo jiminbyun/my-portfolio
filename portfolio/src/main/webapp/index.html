@@ -108,6 +108,14 @@
           <textarea id="comment" name="comment-input" placeholder="Leave your comment here!"></textarea>
           <input type="submit" />
         </form>
+
+        <label for="sort-comments">Sort by:</label>
+        <select name="sort-comments" id="sort-comments" onchange="getCommentsfromServer()">
+          <option value="latest">Latest</option>
+          <option value="oldest">Oldest</option>
+          <option value="name_ascend">Name(A-Z)</option>
+          <option value="name_descend">Name(Z-A)</option>
+        </select>
         <ul id="comments-container"></ul>
       </div>
     </div>

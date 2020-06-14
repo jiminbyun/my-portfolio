@@ -41,8 +41,21 @@ public class DataServlet extends HttpServlet {
     return json;
   }
 
-  private List<Comment> getComments(int maxNumComments) {
-    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+  private List<Comment> getComments(int maxNumComments, String sortType) {
+    Query query = new Query("Comment");
+    switch (sortType) {
+      case "latest":
+        query.addSort("timestamp", SortDirection.DESCENDING);
+        break;
+      case "oldest":
+        query.addSort("timestamp", SortDirection.ASCENDING);
+        break;
+      case "name_ascend":
+        query.addSort("username", SortDirection.ASCENDING);
+        break;
+      case "name_descend":
+        query.addSort("username", SortDirection.DESCENDING);
+    }
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
@@ -64,7 +77,8 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     int maxNumComments = Integer.parseInt(getParameter(request, "num-comments", "5"));
-    List<Comment> comments = getComments(maxNumComments);
+    String sortType = getParameter(request, "sort-comments", "latest");
+    List<Comment> comments = getComments(maxNumComments, sortType);
 
     response.setContentType("application/json;");
     response.getWriter().println(convertToJson(comments));
