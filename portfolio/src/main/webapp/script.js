@@ -105,7 +105,7 @@ function createPasswordForm(comment) {
   commentID.setAttribute('type', 'text');
   commentID.setAttribute('name', "id");
   commentID.setAttribute('value', comment.id);
-  commentID.className = "comment-id";
+  commentID.className = "invisible-form";
 
   const submitButton = document.createElement('input');
   submitButton.setAttribute('type', "submit");
@@ -133,11 +133,13 @@ function setSelectValues() {
   let params = (new URL(document.location)).searchParams;
   let maxNumComments = params.get("num-comments");
   let sortType = params.get("sort-comments");
-  let comment = params.get("comments");
+  let comments = params.get("comments");
   if (maxNumComments) {
+    console.log(maxNumComments);
     document.getElementById(maxNumComments).setAttribute("selected", "selected");
   }
   if (sortType) {
+    console.log(sortType);
     document.getElementById(sortType).setAttribute("selected", "selected");
   }
   if (comments) {
@@ -149,6 +151,9 @@ function setSelectValues() {
 function generateUrlQuery() {
   const maxNumComments = document.getElementById("num-comments").value;
   const sortType = document.getElementById("sort-comments").value;
+
+  document.getElementById("comment-form-num-comments").setAttribute("value", maxNumComments);
+  document.getElementById("comment-form-sort-comments").setAttribute("value", sortType);
 
   var searchParams = new URLSearchParams();
   searchParams.append("num-comments", maxNumComments);
