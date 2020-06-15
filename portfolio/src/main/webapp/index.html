@@ -99,6 +99,12 @@
         </select>
 
         <form id="comment-form" action="/data" method="POST">
+          <label for "username">Name:</label>
+          <input type="text" id="username" name="username" onfocus="this.value=''" value="Anonymous">
+
+          <label for="pwd">Password:</label>
+          <input type="password" id="pwd" name="pwd">
+          
           <textarea id="comment" name="comment-input" placeholder="Leave your comment here!"></textarea>
           <input type="submit" />
         </form>
