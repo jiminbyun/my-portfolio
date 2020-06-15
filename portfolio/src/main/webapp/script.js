@@ -181,4 +181,11 @@ async function getCommentsfromServer() {
 function onload() {
   setSelectValues();
   getCommentsfromServer();
+  initMap();
+}
+
+function initMap() {
+  const map = new google.maps.Map(
+    document.getElementById('map'),
+    {center: {lat: 37.422, lng: -122.084}, zoom: 10});
 }
