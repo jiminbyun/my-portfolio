@@ -89,6 +89,8 @@ public class DataServlet extends HttpServlet {
     String commentText = getParameter(request, "comment-input", "");
     String username = getParameter(request, "username", "Anonymous");
     String password = getParameter(request, "pwd", "");
+    String maxNumComments = getParameter(request, "num-comments", "10");
+    String sortType = getParameter(request, "sort-comments", "latest");
 
     if (!commentText.isEmpty()) {
       long timestamp = System.currentTimeMillis();
@@ -103,7 +105,7 @@ public class DataServlet extends HttpServlet {
       datastore.put(commentEntity);
     }
 
-    response.sendRedirect("/index.html#comments");
+    response.sendRedirect("/index.html?comments=true&num-comments="+maxNumComments+"&sort-comments="+sortType);
   }
 
   /**

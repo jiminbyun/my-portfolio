@@ -105,7 +105,7 @@ function createPasswordForm(comment) {
   commentID.setAttribute('type', 'text');
   commentID.setAttribute('name', "id");
   commentID.setAttribute('value', comment.id);
-  commentID.className = "comment-id";
+  commentID.className = "invisible-form";
 
   const submitButton = document.createElement('input');
   submitButton.setAttribute('type', "submit");
@@ -129,16 +129,43 @@ async function deleteResult() {
   alert(matchResult);
 }
 
+function setSelectValues() {
+  const params = (new URL(document.location)).searchParams;
+  const maxNumComments = params.get("num-comments");
+  const sortType = params.get("sort-comments");
+  const comments = params.get("comments");
+  if (maxNumComments) {
+    console.log(maxNumComments);
+    document.getElementById(maxNumComments).setAttribute("selected", "selected");
+  }
+  if (sortType) {
+    console.log(sortType);
+    document.getElementById(sortType).setAttribute("selected", "selected");
+  }
+  if (comments) {
+    window.history.replaceState({}, document.title, "/" + "index.html");
+    window.location.hash = "#comments";
+  }
+}
+
+function generateUrlQuery() {
+  const maxNumComments = document.getElementById("num-comments").value;
+  const sortType = document.getElementById("sort-comments").value;
+
+  document.getElementById("comment-form-num-comments").setAttribute("value", maxNumComments);
+  document.getElementById("comment-form-sort-comments").setAttribute("value", sortType);
+
+  const searchParams = new URLSearchParams();
+  searchParams.append("num-comments", maxNumComments);
+  searchParams.append("sort-comments", sortType);
+  return searchParams;
+}
+
 /**
  * Fetch comments from the server and display it on the page
  */
 async function getCommentsfromServer() {
-  const maxNumComments = document.getElementById("num-comments").value;
-  const sortType = document.getElementById("sort-comments").value;
-
-  var searchParams = new URLSearchParams();
-  searchParams.append("num-comments", maxNumComments);
-  searchParams.append("sort-comments", sortType);
+  const searchParams = generateUrlQuery();
 
   const response = await fetch('/data?' + searchParams);
   const comments = await response.json();
@@ -149,4 +176,9 @@ async function getCommentsfromServer() {
   for (var i = 0; i < comments.length; i++) {
     commentsListElement.appendChild(createCommentsListElement(comments[i]));
   }
+}
+
+function onload() {
+  setSelectValues();
+  getCommentsfromServer();
 }

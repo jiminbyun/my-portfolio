@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="script.js"></script>
-  <body onload="getCommentsfromServer()">
+  <body onload="onload()">
     <ul id="navbar">
       <li><a href="#home">Home</a>
       <li><a href="#intro">About Me</a>
@@ -92,10 +92,10 @@
       <div id="comments-style">
         <label for="num-comments">Maximum number of comments to show:</label>
         <select name="num-comments" id="num-comments" form="comment-form" onchange="getCommentsfromServer()">
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="15">15</option>
-          <option value="20">20</option>
+          <option id="5" value="5">5</option>
+          <option id="10" value="10">10</option>
+          <option id="15" value="15">15</option>
+          <option id="20" value="20">20</option>
         </select>
 
         <form id="comment-form" action="/data" method="POST">
@@ -107,14 +107,17 @@
           
           <textarea id="comment" name="comment-input" placeholder="Leave your comment here!"></textarea>
           <input type="submit" />
+
+          <input type="text" name="num-comments" class="invisible-form" id="comment-form-num-comments">
+          <input type="text" name="sort-comments" class="invisible-form" id="comment-form-sort-comments">
         </form>
 
         <label for="sort-comments">Sort by:</label>
         <select name="sort-comments" id="sort-comments" onchange="getCommentsfromServer()">
-          <option value="latest">Latest</option>
-          <option value="oldest">Oldest</option>
-          <option value="name_ascend">Name(A-Z)</option>
-          <option value="name_descend">Name(Z-A)</option>
+          <option id="latest" value="latest">Latest</option>
+          <option id="oldest" value="oldest">Oldest</option>
+          <option id="name_ascend" value="name_ascend">Name(A-Z)</option>
+          <option id="name_descend" value="name_descend">Name(Z-A)</option>
         </select>
         <ul id="comments-container"></ul>
       </div>
