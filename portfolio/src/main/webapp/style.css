@@ -258,7 +258,7 @@ h3 {
 
 #comments-container {
   color: saddlebrown;
-  font: 15px Verdana, Geneva, sans-serif;
+  font: 14px Verdana, Geneva, sans-serif;
   list-style-type: none;
 }
 
@@ -275,6 +275,22 @@ h3 {
   background-color:oldlace;
 }
 
+#comments-container > li > p:first-of-type {
+  color: grey;
+  font: 12px Verdana, Geneva, sans-serif;
+}
+
+#comments-container > li > p {
+  margin-bottom: 5px;
+}
+
+#comments-container > li > button {
+  background-color: darkslategrey;
+  color: white;
+  padding: 3px;
+  border: none;
+}
+
 #comments-style {
   padding: 10px 30px;
 }
@@ -288,6 +304,7 @@ h3 {
   border-radius: 4px;
   box-sizing: border-box;
   height: 60px;
+  margin-top: 5px;
   padding: 10px 10px;
   resize: none;
   width: 100%;
@@ -301,4 +318,12 @@ h3 {
   font: 12px Verdana, Geneva, sans-serif;
   margin: 4px 0;
   padding: 12px 12px;
+}
+
+.invisible-form {
+  visibility: hidden;
+}
+
+.passwordForm {
+  margin-top: 4px;
 }
