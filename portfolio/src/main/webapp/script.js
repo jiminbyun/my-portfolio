@@ -130,10 +130,10 @@ async function deleteResult() {
 }
 
 function setSelectValues() {
-  let params = (new URL(document.location)).searchParams;
-  let maxNumComments = params.get("num-comments");
-  let sortType = params.get("sort-comments");
-  let comments = params.get("comments");
+  const params = (new URL(document.location)).searchParams;
+  const maxNumComments = params.get("num-comments");
+  const sortType = params.get("sort-comments");
+  const comments = params.get("comments");
   if (maxNumComments) {
     console.log(maxNumComments);
     document.getElementById(maxNumComments).setAttribute("selected", "selected");
@@ -155,7 +155,7 @@ function generateUrlQuery() {
   document.getElementById("comment-form-num-comments").setAttribute("value", maxNumComments);
   document.getElementById("comment-form-sort-comments").setAttribute("value", sortType);
 
-  var searchParams = new URLSearchParams();
+  const searchParams = new URLSearchParams();
   searchParams.append("num-comments", maxNumComments);
   searchParams.append("sort-comments", sortType);
   return searchParams;
@@ -165,7 +165,7 @@ function generateUrlQuery() {
  * Fetch comments from the server and display it on the page
  */
 async function getCommentsfromServer() {
-  var searchParams = generateUrlQuery();
+  const searchParams = generateUrlQuery();
 
   const response = await fetch('/data?' + searchParams);
   const comments = await response.json();
