@@ -327,3 +327,7 @@ h3 {
 .passwordForm {
   margin-top: 4px;
 }
+
+#map {
+  height: 300px;
+}

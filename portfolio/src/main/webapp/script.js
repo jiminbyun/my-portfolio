@@ -184,3 +184,24 @@ function onload() {
   setSelectValues();
   getCommentsfromServer();
 }
+
+function initMap() {
+  const map = new google.maps.Map(
+    document.getElementById('map'),
+    {center: {lat: 37.422, lng: -122.084}, zoom: 10});
+}
+
+/** Fetches bigfoot sightings data from the server and displays it in a map. */
+async function createBigfootSightingsMap() {
+  const response = await fetch('/bigfoot-data');
+  const bigfootSightings = await response.json();
+  
+  const map = new google.maps.Map(
+    document.getElementById('map'),
+    {center: {lat: 35.78613674, lng: -119.4491591}, zoom: 7});
+
+  bigfootSightings.forEach((bigfootSighting) => {
+    new google.maps.Marker(
+      {position: {lat: bigfootSighting.latitude, lng: bigfootSighting.longitude}, map: map});
+    });
+}
