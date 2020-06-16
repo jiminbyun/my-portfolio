@@ -27,7 +27,7 @@ public class BigfootDataServlet extends HttpServlet {
       String line = scanner.nextLine();
       String[] cells = line.split(",");
 
-      // Because bf-data.csv file has inconsistent style, thus doesn't always split as columns
+      // Because bf-data.csv file has inconsistent style, it doesn't always split as columns
       // when line is split by comma.
       int lastIndex = cells.length - 1 ;
       double lat = Double.parseDouble(cells[lastIndex-1]);
