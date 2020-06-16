@@ -74,7 +74,7 @@ public class DataServlet extends HttpServlet {
       Translation translation = translate.translate(commentText, Translate.TranslateOption.targetLanguage(language));
       String translatedText = translation.getTranslatedText();
 
-      Comment comment = new Comment (id, username, password, timestamp, translatedText);
+      Comment comment = new Comment(id, username, password, timestamp, translatedText);
       comments.add(comment);
     }
 
