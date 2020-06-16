@@ -151,6 +151,7 @@ function setSelectValues() {
 function generateUrlQuery() {
   const maxNumComments = document.getElementById("num-comments").value;
   const sortType = document.getElementById("sort-comments").value;
+  const language = document.getElementById("lang-comments").value;
 
   document.getElementById("comment-form-num-comments").setAttribute("value", maxNumComments);
   document.getElementById("comment-form-sort-comments").setAttribute("value", sortType);
@@ -158,6 +159,7 @@ function generateUrlQuery() {
   const searchParams = new URLSearchParams();
   searchParams.append("num-comments", maxNumComments);
   searchParams.append("sort-comments", sortType);
+  searchParams.append("lang-comments", language);
   return searchParams;
 }
 

@@ -26,6 +26,9 @@ import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.cloud.translate.Translate;
+import com.google.cloud.translate.TranslateOptions;
+import com.google.cloud.translate.Translation;
 import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.Gson;
@@ -78,7 +81,9 @@ public class DataServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     int maxNumComments = Integer.parseInt(getParameter(request, "num-comments", "5"));
     String sortType = getParameter(request, "sort-comments", "latest");
-    List<Comment> comments = getComments(maxNumComments, sortType);
+    String language = getParameter(request, "lang-comments", "en");
+
+    List<Comment> comments = getComments(maxNumComments, sortType, language);
 
     response.setContentType("application/json;");
     response.getWriter().println(convertToJson(comments));
