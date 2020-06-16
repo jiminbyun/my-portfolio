@@ -89,7 +89,8 @@ public class DataServlet extends HttpServlet {
 
     List<Comment> comments = getComments(maxNumComments, sortType, language);
 
-    response.setContentType("application/json;");
+    response.setContentType("application/json; charset=UTF-8");
+    response.setCharacterEncoding("UTF-8");
     response.getWriter().println(convertToJson(comments));
   }
 
