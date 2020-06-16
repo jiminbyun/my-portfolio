@@ -44,7 +44,7 @@ public class DataServlet extends HttpServlet {
     return json;
   }
 
-  private List<Comment> getComments(int maxNumComments, String sortType) {
+  private List<Comment> getComments(int maxNumComments, String sortType, String language) {
     Query query = new Query("Comment");
     switch (sortType) {
       case "latest":
@@ -59,8 +59,10 @@ public class DataServlet extends HttpServlet {
       case "name_descend":
         query.addSort("username", SortDirection.DESCENDING);
     }
+
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
+    Translate translate = TranslateOptions.getDefaultInstance().getService();
 
     List<Comment> comments = new ArrayList<>();
     for (Entity entity : results.asIterable(FetchOptions.Builder.withLimit(maxNumComments))) {
@@ -69,8 +71,10 @@ public class DataServlet extends HttpServlet {
       String password = (String) entity.getProperty("password");
       long timestamp = (long) entity.getProperty("timestamp");
       String commentText = (String) entity.getProperty("text");
+      Translation translation = translate.translate(commentText, Translate.TranslateOption.targetLanguage(language));
+      String translatedText = translation.getTranslatedText();
 
-      Comment comment = new Comment (id, username, password, timestamp, commentText);
+      Comment comment = new Comment (id, username, password, timestamp, translatedText);
       comments.add(comment);
     }
 
