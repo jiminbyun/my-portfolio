@@ -90,6 +90,15 @@
     <div id="comments">
       <h2>Comments</h2>
       <div id="comments-style">
+        <label for="lang-comments">Display comments in:</label>
+        <select name="lang-comments" id="lang-comments" onchange="getCommentsfromServer()">
+          <option id ="en" value="en">English</option>
+          <option id ="zh" value="zh">Chinese</option>
+          <option id ="es" value="es">Spanish</option>
+          <option id ="ar" value="ar">Arabic</option>
+          <option id ="ko" value="ko">Korean</option>
+        </select>
+
         <label for="num-comments">Maximum number of comments to show:</label>
         <select name="num-comments" id="num-comments" form="comment-form" onchange="getCommentsfromServer()">
           <option id="5" value="5">5</option>

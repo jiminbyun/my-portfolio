@@ -26,6 +26,9 @@ import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.cloud.translate.Translate;
+import com.google.cloud.translate.TranslateOptions;
+import com.google.cloud.translate.Translation;
 import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.Gson;
@@ -41,7 +44,7 @@ public class DataServlet extends HttpServlet {
     return json;
   }
 
-  private List<Comment> getComments(int maxNumComments, String sortType) {
+  private List<Comment> getComments(int maxNumComments, String sortType, String language) {
     Query query = new Query("Comment");
     switch (sortType) {
       case "latest":
@@ -56,8 +59,10 @@ public class DataServlet extends HttpServlet {
       case "name_descend":
         query.addSort("username", SortDirection.DESCENDING);
     }
+
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
+    Translate translate = TranslateOptions.getDefaultInstance().getService();
 
     List<Comment> comments = new ArrayList<>();
     for (Entity entity : results.asIterable(FetchOptions.Builder.withLimit(maxNumComments))) {
@@ -66,8 +71,10 @@ public class DataServlet extends HttpServlet {
       String password = (String) entity.getProperty("password");
       long timestamp = (long) entity.getProperty("timestamp");
       String commentText = (String) entity.getProperty("text");
+      Translation translation = translate.translate(commentText, Translate.TranslateOption.targetLanguage(language));
+      String translatedText = translation.getTranslatedText();
 
-      Comment comment = new Comment (id, username, password, timestamp, commentText);
+      Comment comment = new Comment(id, username, password, timestamp, translatedText);
       comments.add(comment);
     }
 
@@ -78,9 +85,12 @@ public class DataServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     int maxNumComments = Integer.parseInt(getParameter(request, "num-comments", "5"));
     String sortType = getParameter(request, "sort-comments", "latest");
-    List<Comment> comments = getComments(maxNumComments, sortType);
+    String language = getParameter(request, "lang-comments", "en");
 
-    response.setContentType("application/json;");
+    List<Comment> comments = getComments(maxNumComments, sortType, language);
+
+    response.setContentType("application/json; charset=UTF-8");
+    response.setCharacterEncoding("UTF-8");
     response.getWriter().println(convertToJson(comments));
   }
 
