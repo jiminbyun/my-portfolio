@@ -21,6 +21,8 @@ public class BigfootDataServlet extends HttpServlet {
   public void init() {
     bigfootSightings = new ArrayList<>();
     Scanner scanner = new Scanner(getServletContext().getResourceAsStream("/WEB-INF/bf-data.csv"));
+    scanner.nextLine(); //skip header line
+    
     while (scanner.hasNextLine()) {
       String line = scanner.nextLine();
       String[] cells = line.split(",");
