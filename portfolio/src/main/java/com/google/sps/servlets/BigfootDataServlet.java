@@ -28,7 +28,7 @@ public class BigfootDataServlet extends HttpServlet {
       double lat = Double.parseDouble(cells[4]);
       double lng = Double.parseDouble(cells[5]);
 
-      bigfootSightings.add(new UfoSighting(lat, lng));
+      bigfootSightings.add(new BigfootSighting(lat, lng));
     }
     scanner.close();
   }
