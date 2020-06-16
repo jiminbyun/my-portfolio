@@ -22,13 +22,16 @@ public class BigfootDataServlet extends HttpServlet {
     bigfootSightings = new ArrayList<>();
     Scanner scanner = new Scanner(getServletContext().getResourceAsStream("/WEB-INF/bf-data.csv"));
     scanner.nextLine(); //skip header line
-    
+
     while (scanner.hasNextLine()) {
       String line = scanner.nextLine();
       String[] cells = line.split(",");
 
-      double lat = Double.parseDouble(cells[4]);
-      double lng = Double.parseDouble(cells[5]);
+      // Because bf-data.csv file has inconsistent style, thus doesn't always split as columns
+      // when line is split by comma.
+      int lastIndex = cells.length - 1 ;
+      double lat = Double.parseDouble(cells[lastIndex-1]);
+      double lng = Double.parseDouble(cells[lastIndex]);
 
       bigfootSightings.add(new BigfootSighting(lat, lng));
     }
