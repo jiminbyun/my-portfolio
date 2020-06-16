@@ -200,6 +200,6 @@ async function createBigfootSightingsMap() {
 
   bigfootSightings.forEach((bigfootSighting) => {
     new google.maps.Marker(
-      {position: {lat: bigfootSighting.lat, lng: bigfootSighting.lng}, map: map});
+      {position: {lat: bigfootSighting.latitude, lng: bigfootSighting.longitude}, map: map});
     });
 }

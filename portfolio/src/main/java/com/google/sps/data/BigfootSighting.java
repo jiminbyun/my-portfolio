@@ -2,11 +2,11 @@ package com.google.sps.data;
 
 public class BigfootSighting {
   
-  private double lat;
-  private double lng;
+  private double latitude;
+  private double longitude;
 
-  public BigfootSighting(double lat, double lng) {
-    this.lat = lat;
-    this.lng = lng;
+  public BigfootSighting(double latitude, double longitude) {
+    this.latitude = latitude;
+    this.longitude = longitude;
   }
 }
