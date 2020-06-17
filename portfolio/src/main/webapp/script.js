@@ -264,7 +264,10 @@ function createMarker(latitude, longitude) {
 function createWindowInput(latitude, longitude) {
   const name = document.createElement('input');
   name.setAttribute("type", 'text');
+  name.setAttribute("value", 'Anonymous');
+  name.setAttribute("onfocus", "this.value=''")
   const content = document.createElement('textarea');
+  content.setAttribute("placeholder", 'Description');
   const submit = document.createElement('button');
   submit.innerText = "Submit";
 
@@ -276,7 +279,9 @@ function createWindowInput(latitude, longitude) {
 
   const infoWindow = document.createElement('div');
   infoWindow.appendChild(name);
+  infoWindow.appendChild(document.createElement('br'));
   infoWindow.appendChild(content);
+  infoWindow.appendChild(document.createElement('br'));
   infoWindow.appendChild(submit);
 
   return infoWindow;
