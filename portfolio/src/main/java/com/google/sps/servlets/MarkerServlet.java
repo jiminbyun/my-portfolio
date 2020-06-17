@@ -49,4 +49,20 @@ public class MarkerServlet extends HttpServlet {
     response.getWriter().println(json);
   }
 
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    double latitude = Double.parseDouble(request.getParameter("latitude"));
+    double longitude = Double.parseDouble(request.getParameter("longitude"));
+    String name = request.getParameter("name");
+    String content = request.getParameter("content");
+
+    Entity markerEntity = new Entity("Marker");
+    markerEntity.setProperty("latitude", latitude);
+    markerEntity.setProperty("longitude", longitude);
+    markerEntity.setProperty("name", name);
+    markerEntity.setProperty("content", content);
+
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    datastore.put(markerEntity);
+  }
 }
