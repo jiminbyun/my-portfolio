@@ -11,6 +11,7 @@ public class Marker {
   public Marker(double latitude, double longitude, String name, String content) {
     this.latitude = latitude;
     this.longitude = longitude;
+    this.name = name;
     this.content = content;
   }
 
