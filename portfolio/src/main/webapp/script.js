@@ -23,6 +23,9 @@ const TOPIC_ELEMENT_MAP = new Map([
   ['thing I like', ['Penguin', 'Blue', 'Baseball', 'Cheesecake']],
 ]);
 
+let currentMarker;
+let map;
+
 /**
  * Gets a random element of a given array.
  */
@@ -186,9 +189,15 @@ function onload() {
 }
 
 function initMap() {
-  const map = new google.maps.Map(
+  map = new google.maps.Map(
     document.getElementById('map'),
     { center: { lat: 37.422, lng: -122.084 }, zoom: 10 });
+
+  map.addListener('click', (event) => {
+    createMarker(event.latLng.lat(), event.latLng.lng());
+  });
+
+  getMarkersfromServer();
 }
 
 /** Fetches bigfoot sightings data from the server and displays it in a map. */
@@ -204,4 +213,71 @@ async function createBigfootSightingsMap() {
     new google.maps.Marker(
       { position: { lat: bigfootSighting.latitude, lng: bigfootSighting.longitude }, map: map });
   });
+}
+
+async function getMarkersfromServer() {
+  const response = await fetch('/markers');
+  const markers = await response.json();
+
+  markers.forEach((marker) => {
+    displayMarker(marker.latitude, marker.longitude, marker.name, marker.content);
+  });
+}
+
+/** Creates a marker that shows info-window when clicked */
+function displayMarker(latitude, longitude, name, content) {
+  const marker = new google.maps.Marker({ position: { lat: latitude, lng: longitude }, map: map });
+  const infoWindow = new google.maps.InfoWindow({ content: `${content} - Submitted by: ${name}` });
+
+  marker.addListener('click', () => {
+    infoWindow.open(map, marker);
+  });
+}
+
+function postMarker(latitude, longitude, name, content) {
+  const searchParams = new URLSearchParams();
+  searchParams.append('latitude', latitude);
+  searchParams.append('longitude', longitude);
+  searchParams.append('name', name);
+  searchParams.append('content', content);
+
+  fetch('/markers', { method: 'POST', body: searchParams });
+}
+
+function createMarker(latitude, longitude) {
+  // If there is a marker user is editing on the map, remove it
+  if (currentMarker) {
+    currentMarker.setMap(null);
+  }
+
+  currentMarker = new google.maps.Marker({ position: { lat: latitude, lng: longitude }, map: map });
+
+  const infoWindow = new google.maps.InfoWindow({ content: createWindowInput(latitude, longitude) });
+
+  google.maps.event.addListener(infoWindow, 'closeclick', () => {
+    currentMarker.setMap(null);
+  });
+
+  infoWindow.open(map, currentMarker);
+}
+
+function createWindowInput(latitude, longitude) {
+  const name = document.createElement('input');
+  name.setAttribute("type", 'text');
+  const content = document.createElement('textarea');
+  const submit = document.createElement('button');
+  submit.innerText = "Submit";
+
+  submit.onclick = () => {
+    postMarker(latitude, longitude, name.value, content.value);
+    displayMarker(latitude, longitude, name.value, content.value);
+    currentMarker.setMap(null);
+  };
+
+  const infoWindow = document.createElement('div');
+  infoWindow.appendChild(name);
+  infoWindow.appendChild(content);
+  infoWindow.appendChild(submit);
+
+  return infoWindow;
 }
