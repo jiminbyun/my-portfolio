@@ -14,7 +14,7 @@
 
 // Global variable to track which topic has been randomly selected. 
 // Initialize to empty string to represent no topic is selected when page is first loaded. 
-var topic="";
+var topic = "";
 
 const TOPIC_ELEMENT_MAP = new Map([
   ['book recommendation', ['Rangers', 'Exhalation', 'The Elegant Universe', 'Human Acts']],
@@ -44,16 +44,16 @@ function setElementText(text, id) {
 function getRandomTopic() {
   const TOPICS = Array.from(TOPIC_ELEMENT_MAP.keys());
   topic = getRandomElement(TOPICS);
-  setElementText(topic, 'topic-container'); 
+  setElementText(topic, 'topic-container');
 }
 
 /**
  * Generate random element from topic if topic is valid and display it on the page.  
  */
 function getRandomElementfromTopic() {
-  if (topic.length == 0){ 
-      setElementText('You have to select topic first!', 'elem-container');
-      return;
+  if (topic.length == 0) {
+    setElementText('You have to select topic first!', 'elem-container');
+    return;
   }
   let elemArr = TOPIC_ELEMENT_MAP.get(topic);
   let elem = getRandomElement(elemArr)
@@ -119,7 +119,7 @@ function createPasswordForm(comment) {
     await getCommentsfromServer();
     deleteResult();
   };
-  
+
   return passwordForm;
 }
 
@@ -171,7 +171,7 @@ async function getCommentsfromServer() {
 
   const response = await fetch('/data?' + searchParams);
   const comments = await response.json();
-  
+
   const commentsListElement = document.getElementById('comments-container');
   commentsListElement.innerHTML = '';
 
@@ -188,20 +188,20 @@ function onload() {
 function initMap() {
   const map = new google.maps.Map(
     document.getElementById('map'),
-    {center: {lat: 37.422, lng: -122.084}, zoom: 10});
+    { center: { lat: 37.422, lng: -122.084 }, zoom: 10 });
 }
 
 /** Fetches bigfoot sightings data from the server and displays it in a map. */
 async function createBigfootSightingsMap() {
   const response = await fetch('/bigfoot-data');
   const bigfootSightings = await response.json();
-  
+
   const map = new google.maps.Map(
     document.getElementById('map'),
-    {center: {lat: 35.78613674, lng: -119.4491591}, zoom: 7});
+    { center: { lat: 35.78613674, lng: -119.4491591 }, zoom: 7 });
 
   bigfootSightings.forEach((bigfootSighting) => {
     new google.maps.Marker(
-      {position: {lat: bigfootSighting.latitude, lng: bigfootSighting.longitude}, map: map});
-    });
+      { position: { lat: bigfootSighting.latitude, lng: bigfootSighting.longitude }, map: map });
+  });
 }
