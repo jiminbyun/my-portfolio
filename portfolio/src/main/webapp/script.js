@@ -296,7 +296,7 @@ function createWindowInput(latitude, longitude) {
 
 function selectMap() {
   const option = document.getElementById("map-select").value;
-  if (option == "user") {
+  if (option === "user") {
     createUserInputMap();
   } else {
     createBigfootSightingsMap();
