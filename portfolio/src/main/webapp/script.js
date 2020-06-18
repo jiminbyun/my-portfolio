@@ -222,8 +222,7 @@ async function createBigfootSightingsMap() {
       { position: { lat: bigfootSighting.latitude, lng: bigfootSighting.longitude }, map: map }));
   });
 
-  var markerCluster = new MarkerClusterer(map, markers,
-            {imagePath: '/images/markers/'});
+  new MarkerClusterer(map, markers, { imagePath: '/images/markers/' });
 }
 
 async function getMarkersfromServer() {
