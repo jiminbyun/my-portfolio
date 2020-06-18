@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Scanner;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/bigfoot-data")
 public class BigfootDataServlet extends HttpServlet {
   
-  private Collection<BigfootSighting> bigfootSightings;
+  private ArrayList<BigfootSighting> bigfootSightings;
 
   @Override 
   public void init() {
@@ -36,13 +37,15 @@ public class BigfootDataServlet extends HttpServlet {
       bigfootSightings.add(new BigfootSighting(latitude, longitude));
     }
     scanner.close();
+    Collections.shuffle(bigfootSightings);
   }
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    int maxNumBigfoot = Integer.parseInt(request.getParameter("num-bigfoot"));
     response.setContentType("application/json");
     Gson gson = new Gson();
-    String json = gson.toJson(bigfootSightings);
+    String json = gson.toJson(bigfootSightings.subList(0, maxNumBigfoot));
     response.getWriter().println(json);
   }
 }
