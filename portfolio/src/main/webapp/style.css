@@ -329,5 +329,17 @@ h3 {
 }
 
 #map {
-  height: 300px;
+  height: 70vh;
+  margin-top: 10px;
+}
+
+#map-container > label {
+  color: darkslategrey;
+  font: 15px Verdana, Geneva, sans-serif;
+}
+
+#map-descriptor {
+  color: saddlebrown;
+  font: 15px Verdana, Geneva, sans-serif;
+  padding-top: 10px;
 }

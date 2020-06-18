@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="script.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJuR05Duv4HT2OB7QJvSp_wk993j1Gnwc&callback=initMap" type="text/javascript"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJuR05Duv4HT2OB7QJvSp_wk993j1Gnwc&callback=selectMap" type="text/javascript"></script>
   <body onload="onload()">
     <ul id="navbar">
       <li><a href="#home">Home</a>
@@ -83,7 +83,15 @@
     </div>
     <div id="extra">
       <h2>Etc.</h2>
-      <div id ="map"></div>
+      <div id ="map-container">
+        <label for="map-select">Choose data to display:</label>
+        <select name="map-select" id="map-select" onchange="selectMap()">
+          <option value="user">Opinions from users</option>
+          <option value="bigfoot">Bigfoot Sightings</option>
+        </select>
+        <div id="map-descriptor"></div>
+        <div id="map"></div>
+      </div>
       <div id="dog">
         <a href="/woof.html">🐕</a>
         <p id="dog-phrase">Click the dog!</p>
