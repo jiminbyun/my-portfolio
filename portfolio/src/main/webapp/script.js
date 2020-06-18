@@ -215,6 +215,7 @@ function createNumBigfootSelect() {
   const messageContainer = document.getElementById("map-descriptor");
   messageContainer.innerText = "Choose number of random sightings of bigfoot to display 🦧:"
   const selectNumBigfoot = document.createElement('select');
+  selectNumBigfoot.id = "num-bigfoot";
   const SELECT_OPTIONS = ["100", "1000", "2000", "all"];
 
   for (let i = 0; i < SELECT_OPTIONS.length; i++) {
@@ -226,7 +227,8 @@ function createNumBigfootSelect() {
 
 /** Fetches bigfoot sightings data from the server and displays it in a map. */
 async function createBigfootSightingsMap() {
-  const response = await fetch('/bigfoot-data');
+  const numBigfoot = document.getElementById("num-bigfoot").value;
+  const response = await fetch('/bigfoot-data?num-bigfoot='+numBigfoot);
   const bigfootSightings = await response.json();
 
   const map = new google.maps.Map(
