@@ -188,26 +188,33 @@ function onload() {
   getCommentsfromServer();
 }
 
-function initMap() {
+function createUserInputMap() {
   map = new google.maps.Map(
     document.getElementById('map'),
-    { center: { lat: 37.422, lng: -122.084 }, zoom: 10 });
+    { center: { lat: 0, lng: 0 }, zoom: 2 });
 
   map.addListener('click', (event) => {
     createMarker(event.latLng.lat(), event.latLng.lng());
   });
+
+  const messageContainer = document.getElementById("map-descriptor");
+  messageContainer.innerText =
+    "Click on the map to create a marker. Submit your relationship or interesting facts about that place!";
 
   getMarkersfromServer();
 }
 
 /** Fetches bigfoot sightings data from the server and displays it in a map. */
 async function createBigfootSightingsMap() {
+  const messageContainer = document.getElementById("map-descriptor");
+  messageContainer.innerText = "This is locations of Bigfoot sightings 🦧";
+
   const response = await fetch('/bigfoot-data');
   const bigfootSightings = await response.json();
 
   const map = new google.maps.Map(
     document.getElementById('map'),
-    { center: { lat: 35.78613674, lng: -119.4491591 }, zoom: 7 });
+    { center: { lat: 39.8283, lng: -98.5795 }, zoom: 4 });
 
   bigfootSightings.forEach((bigfootSighting) => {
     new google.maps.Marker(
@@ -290,7 +297,7 @@ function createWindowInput(latitude, longitude) {
 function selectMap() {
   const option = document.getElementById("map-select").value;
   if (option == "user") {
-    initMap();
+    createUserInputMap();
   } else {
     createBigfootSightingsMap();
   }

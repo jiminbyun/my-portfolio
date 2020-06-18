@@ -330,9 +330,16 @@ h3 {
 
 #map {
   height: 70vh;
+  margin-top: 10px;
 }
 
 #map-container > label {
-  font: 15px Verdana, Geneva, sans-serif;
   color: darkslategrey;
+  font: 15px Verdana, Geneva, sans-serif;
+}
+
+#map-descriptor {
+  color: saddlebrown;
+  font: 15px Verdana, Geneva, sans-serif;
+  padding-top: 10px;
 }
