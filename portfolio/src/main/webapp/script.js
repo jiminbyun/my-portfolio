@@ -14,7 +14,7 @@
 
 // Global variable to track which topic has been randomly selected. 
 // Initialize to empty string to represent no topic is selected when page is first loaded. 
-var topic="";
+let topic = "";
 
 const TOPIC_ELEMENT_MAP = new Map([
   ['book recommendation', ['Rangers', 'Exhalation', 'The Elegant Universe', 'Human Acts']],
@@ -22,6 +22,9 @@ const TOPIC_ELEMENT_MAP = new Map([
   ['korean phrase', ['안녕하세요!', '좋은 하루 되세요!', '오늘 날씨는 어떤가요?', '졸려요', '고맙습니다']],
   ['thing I like', ['Penguin', 'Blue', 'Baseball', 'Cheesecake']],
 ]);
+
+let currentMarker;
+let map;
 
 /**
  * Gets a random element of a given array.
@@ -44,16 +47,16 @@ function setElementText(text, id) {
 function getRandomTopic() {
   const TOPICS = Array.from(TOPIC_ELEMENT_MAP.keys());
   topic = getRandomElement(TOPICS);
-  setElementText(topic, 'topic-container'); 
+  setElementText(topic, 'topic-container');
 }
 
 /**
  * Generate random element from topic if topic is valid and display it on the page.  
  */
 function getRandomElementfromTopic() {
-  if (topic.length == 0){ 
-      setElementText('You have to select topic first!', 'elem-container');
-      return;
+  if (topic.length === 0) {
+    setElementText('You have to select topic first!', 'elem-container');
+    return;
   }
   let elemArr = TOPIC_ELEMENT_MAP.get(topic);
   let elem = getRandomElement(elemArr)
@@ -119,7 +122,7 @@ function createPasswordForm(comment) {
     await getCommentsfromServer();
     deleteResult();
   };
-  
+
   return passwordForm;
 }
 
@@ -171,7 +174,7 @@ async function getCommentsfromServer() {
 
   const response = await fetch('/data?' + searchParams);
   const comments = await response.json();
-  
+
   const commentsListElement = document.getElementById('comments-container');
   commentsListElement.innerHTML = '';
 
@@ -186,22 +189,100 @@ function onload() {
 }
 
 function initMap() {
-  const map = new google.maps.Map(
+  map = new google.maps.Map(
     document.getElementById('map'),
-    {center: {lat: 37.422, lng: -122.084}, zoom: 10});
+    { center: { lat: 37.422, lng: -122.084 }, zoom: 10 });
+
+  map.addListener('click', (event) => {
+    createMarker(event.latLng.lat(), event.latLng.lng());
+  });
+
+  getMarkersfromServer();
 }
 
 /** Fetches bigfoot sightings data from the server and displays it in a map. */
 async function createBigfootSightingsMap() {
   const response = await fetch('/bigfoot-data');
   const bigfootSightings = await response.json();
-  
+
   const map = new google.maps.Map(
     document.getElementById('map'),
-    {center: {lat: 35.78613674, lng: -119.4491591}, zoom: 7});
+    { center: { lat: 35.78613674, lng: -119.4491591 }, zoom: 7 });
 
   bigfootSightings.forEach((bigfootSighting) => {
     new google.maps.Marker(
-      {position: {lat: bigfootSighting.latitude, lng: bigfootSighting.longitude}, map: map});
-    });
+      { position: { lat: bigfootSighting.latitude, lng: bigfootSighting.longitude }, map: map });
+  });
+}
+
+async function getMarkersfromServer() {
+  const response = await fetch('/markers');
+  const markers = await response.json();
+
+  markers.forEach((marker) => {
+    displayMarker(marker.latitude, marker.longitude, marker.name, marker.content);
+  });
+}
+
+/** Creates a marker that shows info-window when clicked */
+function displayMarker(latitude, longitude, name, content) {
+  const marker = new google.maps.Marker({ position: { lat: latitude, lng: longitude }, map: map });
+  const infoWindow = new google.maps.InfoWindow({ content: `${content} - Submitted by: ${name}` });
+
+  marker.addListener('click', () => {
+    infoWindow.open(map, marker);
+  });
+}
+
+function postMarker(latitude, longitude, name, content) {
+  const searchParams = new URLSearchParams();
+  searchParams.append('latitude', latitude);
+  searchParams.append('longitude', longitude);
+  searchParams.append('name', name);
+  searchParams.append('content', content);
+
+  fetch('/markers', { method: 'POST', body: searchParams });
+}
+
+function createMarker(latitude, longitude) {
+  // If there is a marker user is editing on the map, remove it
+  if (currentMarker) {
+    currentMarker.setMap(null);
+  }
+
+  currentMarker = new google.maps.Marker({ position: { lat: latitude, lng: longitude }, map: map });
+
+  const infoWindow = new google.maps.InfoWindow({ content: createWindowInput(latitude, longitude) });
+
+  google.maps.event.addListener(infoWindow, 'closeclick', () => {
+    currentMarker.setMap(null);
+  });
+
+  infoWindow.open(map, currentMarker);
+}
+
+function createWindowInput(latitude, longitude) {
+  const name = document.createElement('input');
+  name.setAttribute("type", 'text');
+  name.setAttribute("value", 'Anonymous');
+  name.setAttribute("onfocus", "this.value=''")
+  const content = document.createElement('textarea');
+  content.setAttribute("placeholder", 'Description');
+  const submit = document.createElement('button');
+  submit.innerText = "Submit";
+
+  submit.onclick = () => {
+    postMarker(latitude, longitude, name.value, content.value);
+    displayMarker(latitude, longitude, name.value, content.value);
+    currentMarker.setMap(null);
+  };
+
+  const infoWindow = document.createElement('div');
+  infoWindow.appendChild(name);
+  infoWindow.appendChild(document.createElement('br'));
+  infoWindow.appendChild(content);
+  infoWindow.appendChild(document.createElement('br'));
+  infoWindow.appendChild(submit);
+
+  return infoWindow;
 }
