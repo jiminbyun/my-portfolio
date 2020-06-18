@@ -286,3 +286,12 @@ function createWindowInput(latitude, longitude) {
 
   return infoWindow;
 }
+
+function selectMap() {
+  const option = document.getElementById("map-select").value;
+  if (option == "user") {
+    initMap();
+  } else {
+    createBigfootSightingsMap();
+  }
+}
