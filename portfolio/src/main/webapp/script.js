@@ -204,10 +204,25 @@ function createUserInputMap() {
   getMarkersfromServer();
 }
 
+function createOptionElement(value) {
+  const optionElement = document.createElement('option');
+  optionElement.innerText = value;
+  optionElement.setAttribute("value", value);
+  return optionElement
+}
+
 /** Fetches bigfoot sightings data from the server and displays it in a map. */
 async function createBigfootSightingsMap() {
   const messageContainer = document.getElementById("map-descriptor");
-  messageContainer.innerText = "This is locations of Bigfoot sightings 🦧";
+  messageContainer.innerText = "Choose number of random sightings of bigfoot to display 🦧:"
+  const selectNumBigfoot = document.createElement('select');
+  const SELECT_OPTIONS = ["100", "1000", "2000", "all"];
+
+  for (let i = 0; i < SELECT_OPTIONS.length; i++) {
+    const optionElement = createOptionElement(SELECT_OPTIONS[i]);
+    selectNumBigfoot.appendChild(optionElement);
+  }
+  messageContainer.appendChild(selectNumBigfoot);
 
   const response = await fetch('/bigfoot-data');
   const bigfootSightings = await response.json();
