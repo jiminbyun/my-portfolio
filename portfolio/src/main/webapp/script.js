@@ -211,8 +211,7 @@ function createOptionElement(value) {
   return optionElement
 }
 
-/** Fetches bigfoot sightings data from the server and displays it in a map. */
-async function createBigfootSightingsMap() {
+function createNumBigfootSelect() {
   const messageContainer = document.getElementById("map-descriptor");
   messageContainer.innerText = "Choose number of random sightings of bigfoot to display 🦧:"
   const selectNumBigfoot = document.createElement('select');
@@ -223,7 +222,10 @@ async function createBigfootSightingsMap() {
     selectNumBigfoot.appendChild(optionElement);
   }
   messageContainer.appendChild(selectNumBigfoot);
+}
 
+/** Fetches bigfoot sightings data from the server and displays it in a map. */
+async function createBigfootSightingsMap() {
   const response = await fetch('/bigfoot-data');
   const bigfootSightings = await response.json();
 
@@ -314,6 +316,7 @@ function selectMap() {
   if (option == "user") {
     createUserInputMap();
   } else {
+    createNumBigfootSelect();
     createBigfootSightingsMap();
   }
 }
