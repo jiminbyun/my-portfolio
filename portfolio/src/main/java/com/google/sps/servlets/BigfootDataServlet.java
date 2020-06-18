@@ -42,7 +42,12 @@ public class BigfootDataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    int maxNumBigfoot = Integer.parseInt(request.getParameter("num-bigfoot"));
+    int maxNumBigfoot;
+    try { 
+      maxNumBigfoot = Integer.parseInt(request.getParameter("num-bigfoot"));
+    } catch (Exception e) {
+      maxNumBigfoot = bigfootSightings.size();
+    }
     response.setContentType("application/json");
     Gson gson = new Gson();
     String json = gson.toJson(bigfootSightings.subList(0, maxNumBigfoot));
