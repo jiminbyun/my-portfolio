@@ -14,7 +14,7 @@
 
 // Global variable to track which topic has been randomly selected. 
 // Initialize to empty string to represent no topic is selected when page is first loaded. 
-var topic = "";
+let topic = "";
 
 const TOPIC_ELEMENT_MAP = new Map([
   ['book recommendation', ['Rangers', 'Exhalation', 'The Elegant Universe', 'Human Acts']],
@@ -54,7 +54,7 @@ function getRandomTopic() {
  * Generate random element from topic if topic is valid and display it on the page.  
  */
 function getRandomElementfromTopic() {
-  if (topic.length == 0) {
+  if (topic.length === 0) {
     setElementText('You have to select topic first!', 'elem-container');
     return;
   }
@@ -316,7 +316,7 @@ function createWindowInput(latitude, longitude) {
 
 function selectMap() {
   const option = document.getElementById("map-select").value;
-  if (option == "user") {
+  if (option === "user") {
     createUserInputMap();
   } else {
     createNumBigfootSelect();
