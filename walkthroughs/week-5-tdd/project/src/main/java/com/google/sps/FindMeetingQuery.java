@@ -19,8 +19,8 @@ import java.util.Collections;
 import java.util.ArrayList;
 
 public final class FindMeetingQuery {
-  private Collection<TimeRange> deepCopy(ArrayList<TimeRange> original) {
-    Collection<TimeRange> copy = new ArrayList<TimeRange>();
+  private ArrayList<TimeRange> deepCopy(ArrayList<TimeRange> original) {
+    ArrayList<TimeRange> copy = new ArrayList<TimeRange>();
 
     for (int i = 0; i < original.size(); i++) {
       TimeRange originalElement = original.get(i);
@@ -30,38 +30,6 @@ public final class FindMeetingQuery {
     }
 
     return copy;
-  }
-
-  private ArrayList<TimeRange> checkAttendeesWithEvents(Collection<Event> events, 
-    Collection<String> attendees, ArrayList<TimeRange> possibleMeetingTimes, long meetingDuration) {
-    for (Event event : events) {
-      if (!Collections.disjoint(event.getAttendees(), attendees)) {
-        TimeRange eventTime = event.getWhen();
-        
-        for (int i = 0; i < possibleMeetingTimes.size(); i++) {
-          TimeRange currentTime = possibleMeetingTimes.get(i);
-          if (currentTime.overlaps(eventTime)) {
-            possibleMeetingTimes.remove(i);
-
-            if (currentTime.start() < eventTime.start()) {
-              int duration = eventTime.start() - currentTime.start();
-              if (duration >= meetingDuration) {
-                possibleMeetingTimes.add(TimeRange.fromStartDuration(currentTime.start(), duration));
-              }
-            }
-
-            if (currentTime.end() > eventTime.end()) {
-              int duration = currentTime.end() - eventTime.end();
-              if (duration >= meetingDuration) {
-                possibleMeetingTimes.add(TimeRange.fromStartDuration(eventTime.end(), duration));
-              }
-            }
-          }
-        }
-      }
-    }
-    
-    return possibleMeetingTimes;
   }
 
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
@@ -74,7 +42,70 @@ public final class FindMeetingQuery {
     } 
 
     possibleMeetingTimes.add(TimeRange.WHOLE_DAY);
-    possibleMeetingTimes = checkAttendeesWithEvents(events, attendees, possibleMeetingTimes, request.getDuration());
-    return possibleMeetingTimes;
+
+    for (Event event : events) {
+      if (!Collections.disjoint(event.getAttendees(), attendees)) {
+        TimeRange eventTime = event.getWhen();
+        
+        for (int i = 0; i < possibleMeetingTimes.size(); i++) {
+          TimeRange currentTime = possibleMeetingTimes.get(i);
+          if (currentTime.overlaps(eventTime)) {
+            possibleMeetingTimes.remove(i);
+
+            if (currentTime.start() < eventTime.start()) {
+              int duration = eventTime.start() - currentTime.start();
+              if (duration >= request.getDuration()) {
+                possibleMeetingTimes.add(TimeRange.fromStartDuration(currentTime.start(), duration));
+              }
+            }
+
+            if (currentTime.end() > eventTime.end()) {
+              int duration = currentTime.end() - eventTime.end();
+              if (duration >= request.getDuration()) {
+                possibleMeetingTimes.add(TimeRange.fromStartDuration(eventTime.end(), duration));
+              }
+            }
+          }
+        }
+      }
+    }
+
+    ArrayList<TimeRange> possibleMeetingTimesOptional = deepCopy(possibleMeetingTimes);
+    for (Event event : events) {
+      if (!Collections.disjoint(event.getAttendees(), optionalAttendees)) {
+        TimeRange eventTime = event.getWhen();
+
+        int i = 0;
+        
+        while(i < possibleMeetingTimesOptional.size()) {
+          TimeRange currentTime = possibleMeetingTimesOptional.get(i);
+          if (currentTime.overlaps(eventTime)) {
+            possibleMeetingTimesOptional.remove(i);
+
+            if (currentTime.start() < eventTime.start()) {
+              int duration = eventTime.start() - currentTime.start();
+              if (duration >= request.getDuration()) {
+                possibleMeetingTimesOptional.add(TimeRange.fromStartDuration(currentTime.start(), duration));
+              }
+            }
+
+            if (currentTime.end() > eventTime.end()) {
+              int duration = currentTime.end() - eventTime.end();
+              if (duration >= request.getDuration()) {
+                possibleMeetingTimesOptional.add(TimeRange.fromStartDuration(eventTime.end(), duration));
+              }
+            }
+          }
+          else {
+            i++;
+          }
+        }
+      }
+    }
+
+    if (possibleMeetingTimesOptional.isEmpty() && !attendees.isEmpty()) {
+      return possibleMeetingTimes;
+    }
+    return possibleMeetingTimesOptional;
   }
 }
