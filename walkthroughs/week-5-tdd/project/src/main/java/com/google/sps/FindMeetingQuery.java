@@ -19,16 +19,21 @@ import java.util.Collections;
 import java.util.ArrayList;
 
 public final class FindMeetingQuery {
-  public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    Collection<String> attendees = request.getAttendees();
-    ArrayList<TimeRange> possibleMeetingTimes = new ArrayList<>();
+  private Collection<TimeRange> deepCopy(ArrayList<TimeRange> original) {
+    Collection<TimeRange> copy = new ArrayList<TimeRange>();
 
-    if (request.getDuration() > TimeRange.WHOLE_DAY.duration()) {
-      return possibleMeetingTimes;
-    } 
+    for (int i = 0; i < original.size(); i++) {
+      TimeRange originalElement = original.get(i);
+      TimeRange copyElement = TimeRange.fromStartDuration(
+        originalElement.start(), originalElement.duration());
+      copy.add(copyElement);
+    }
 
-    possibleMeetingTimes.add(TimeRange.WHOLE_DAY);
+    return copy;
+  }
 
+  private ArrayList<TimeRange> checkAttendeesWithEvents(Collection<Event> events, 
+    Collection<String> attendees, ArrayList<TimeRange> possibleMeetingTimes, long meetingDuration) {
     for (Event event : events) {
       if (!Collections.disjoint(event.getAttendees(), attendees)) {
         TimeRange eventTime = event.getWhen();
@@ -40,14 +45,14 @@ public final class FindMeetingQuery {
 
             if (currentTime.start() < eventTime.start()) {
               int duration = eventTime.start() - currentTime.start();
-              if (duration >= request.getDuration()) {
+              if (duration >= meetingDuration) {
                 possibleMeetingTimes.add(TimeRange.fromStartDuration(currentTime.start(), duration));
               }
             }
 
             if (currentTime.end() > eventTime.end()) {
               int duration = currentTime.end() - eventTime.end();
-              if (duration >= request.getDuration()) {
+              if (duration >= meetingDuration) {
                 possibleMeetingTimes.add(TimeRange.fromStartDuration(eventTime.end(), duration));
               }
             }
@@ -55,6 +60,21 @@ public final class FindMeetingQuery {
         }
       }
     }
+    
+    return possibleMeetingTimes;
+  }
+
+  public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
+    Collection<String> attendees = request.getAttendees();
+    Collection<String> optionalAttendees = request.getOptionalAttendees();
+    ArrayList<TimeRange> possibleMeetingTimes = new ArrayList<>();
+
+    if (request.getDuration() > TimeRange.WHOLE_DAY.duration()) {
+      return possibleMeetingTimes;
+    } 
+
+    possibleMeetingTimes.add(TimeRange.WHOLE_DAY);
+    possibleMeetingTimes = checkAttendeesWithEvents(events, attendees, possibleMeetingTimes, request.getDuration());
     return possibleMeetingTimes;
   }
 }
