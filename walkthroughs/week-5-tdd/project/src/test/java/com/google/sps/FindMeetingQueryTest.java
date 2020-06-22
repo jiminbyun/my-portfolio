@@ -273,7 +273,7 @@ public final class FindMeetingQueryTest {
   }
 
   @Test
-  public void optionalAttendeeNotConsidered() {
+  public void optionalAttendeeNotRequired() {
     // Have each mandatory attendee have different events. Optional attendee attends all day event. 
     // We should see two options because each person except optional attendee has split the restricted times. 
     //
