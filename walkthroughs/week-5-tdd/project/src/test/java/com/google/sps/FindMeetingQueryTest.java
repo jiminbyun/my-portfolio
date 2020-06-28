@@ -415,5 +415,32 @@ public final class FindMeetingQueryTest {
 
     Assert.assertEquals(expected, actual);
   }
+
+  @Test
+  public void notEnoughRoomWithThreeAttendees() {
+    // Have three mandatory people, but so that there is not enough room at any point in the day to have
+    // the meeting. Let last event be the whole day event overlapping previous two events. 
+    //
+    // Events  :       |--A--|     |--B--|
+    //           |-------------C---------------|
+    // Day     : |-----------------------------|
+    // Options :   
+
+    Collection<Event> events = Arrays.asList(
+        new Event("Event 1", TimeRange.fromStartDuration(TIME_0800AM, DURATION_30_MINUTES),
+            Arrays.asList(PERSON_A)),
+        new Event("Event 2", TimeRange.fromStartDuration(TIME_0900AM, DURATION_30_MINUTES),
+            Arrays.asList(PERSON_B)),
+        new Event("Event 3", TimeRange.WHOLE_DAY, 
+            Arrays.asList(PERSON_C)));
+
+    MeetingRequest request =
+        new MeetingRequest(Arrays.asList(PERSON_A, PERSON_B, PERSON_C), DURATION_30_MINUTES);
+
+    Collection<TimeRange> actual = query.query(events, request);
+    Collection<TimeRange> expected = Arrays.asList();
+
+    Assert.assertEquals(expected, actual);
+  }
 }
 

@@ -47,7 +47,8 @@ public final class FindMeetingQuery {
       if (!Collections.disjoint(event.getAttendees(), attendees)) {
         TimeRange eventTime = event.getWhen();
         
-        for (int i = 0; i < possibleMeetingTimes.size(); i++) {
+        int i = 0;
+        while (i < possibleMeetingTimes.size()) {
           TimeRange currentTime = possibleMeetingTimes.get(i);
           if (currentTime.overlaps(eventTime)) {
             possibleMeetingTimes.remove(i);
@@ -65,6 +66,9 @@ public final class FindMeetingQuery {
                 possibleMeetingTimes.add(TimeRange.fromStartDuration(eventTime.end(), duration));
               }
             }
+          }
+          else {
+            i++;
           }
         }
       }
