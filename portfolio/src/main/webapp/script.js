@@ -216,10 +216,11 @@ async function createBigfootSightingsMap() {
     document.getElementById('map'),
     { center: { lat: 39.8283, lng: -98.5795 }, zoom: 4 });
 
-  bigfootSightings.forEach((bigfootSighting) => {
-    new google.maps.Marker(
-      { position: { lat: bigfootSighting.latitude, lng: bigfootSighting.longitude }, map: map });
-  });
+  const markers = bigfootSightings.map(bigfootSighting => new google.maps.Marker(
+    { position: { lat: bigfootSighting.latitude, lng: bigfootSighting.longitude }, map: map }));
+
+  const cluster = new MarkerClusterer(map, markers, { imagePath: '/images/markers/' });
+  return cluster;
 }
 
 async function getMarkersfromServer() {
